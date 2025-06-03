@@ -1,0 +1,52 @@
+# Laravel (back)
+back/vendor/
+back/node_modules/
+back/public/storage/
+back/storage/*.key
+back/.env
+back/.env.*
+back/.phpunit.result.cache
+back/Homestead.json
+back/Homestead.yaml
+back/npm-debug.log
+back/yarn-error.log
+back/.idea/
+back/.vscode/
+back/bootstrap/cache/*
+!back/bootstrap/cache/.gitignore
+
+# Laravel Telescope
+back/storage/telescope/
+
+# Laravel Horizon
+back/storage/horizon/
+
+# Laravel Nova (se usar)
+back/nova-components/
+
+# Angular (front)
+front/node_modules/
+front/dist/
+front/.angular/cache/
+front/.angular/config.json
+front/.env
+front/.env.*
+
+# IDEs e sistema operacional
+*.log
+*.swp
+*.swo
+*.bak
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# MacOS
+.DS_Store
+
+# Linux
+*~
+
+# Windows
+$RECYCLE.BIN/
