@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'fotoPerfil' => 'nullable|string|max:120',
         ]);
-
+        $path = "";
         if($request->file('fotoPerfil')){
             $path = Storage::putFile('users', $request->file('fotoPerfil'));
         }
@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'status' => 1,
-            'fotoPerfil' => $validated['imagemCurso']
+            'fotoPerfil' => $validated['fotoPerfil']
         ]);
 
         event(new Registered($user));
