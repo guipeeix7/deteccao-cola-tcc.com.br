@@ -1,0 +1,80 @@
+<div class="row"   *ngIf="dataLoaded | async">
+  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 align-self-center align-middle">
+    <h2 class="text-muted">
+      {{ tableName }}
+    </h2>
+  </div>
+  <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 align-self-center" *ngIf="'create '+roleName | guard">
+    <div class="text-right mb-4">
+      <div *ngIf="createOption != false">
+        <!-- <a class="btn btn-success btn-round btn-small" [routerLink]="['../../create']"> Novo registro </a> -->
+        <ng-content select="[customCreate]">
+
+        </ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+<app-search-table *ngIf="'read '+roleName | guard" (searchEmitter)="searchDatabase($event)">
+  <ng-content search>
+  </ng-content>
+</app-search-table>
+
+<hr>
+<ng-container *ngIf="'read '+roleName | guard">
+
+
+<div class="table-responsive" *ngIf="dataLoaded | async"  >
+  <table  @myInsertRemoveTrigger class="table align-items-center table-flush">
+    <thead class="thead-light">
+      <tr>
+        <th class="text-center">
+          Ações
+        </th>
+        <th scope="col" class="text-center" *ngFor="let label of labels">
+             {{ label }}
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="noDataFound==false; else elseBlock">
+      <tr *ngFor="let itemValue of itemValues">
+        <td [ngClass]="showLoad ? 'loading' : 'ready'" >
+          <span></span>
+          <div class="row">
+            <div class="col">
+              <a class="btn btn-sm btn-outline-primary btn-block" *ngIf="'update '+roleName | guard" [routerLink] = "['/assunto/update/'+itemValue.id]"  data-toggle="tooltip" data-bs-original-title="Show Role">
+                <i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i> Editar
+              </a>
+            </div>
+            <div class="col">
+              <a class="btn btn-block btn-outline-danger btn-sm" *ngIf="'delete '+roleName | guard" (click)="destroyRow(itemValue.id)" data-toggle="tooltip" data-bs-original-title="Show Role">
+                <i class="fa fa-trash fa-fw"></i> Deletar
+              </a>
+            </div>
+          </div>
+        </td>
+
+        <td [ngClass]="showLoad ? 'loading' : 'ready'"  class="text-center" *ngFor="let value of objectValues(itemValue)">
+          <p>{{ value | TrucanteString:[30, '...'] }}</p>
+          <span></span>
+        </td>
+
+      </tr>
+    </tbody>
+    <ng-template #elseBlock>
+      <tbody> </tbody>
+    </ng-template>
+  </table>
+
+  <div *ngIf="noDataFound==true"  class="row justify-content-center align-items-center  pt-4">
+    <div class="col-12 text-center align-self-center">
+      <h1 class="text-muted">
+        Sem dados
+      </h1>
+    </div>
+  </div>
+  <app-dynamic-paginator (searchEmitter)="searchDatabase($event)" (paginatorEmitter)="changePage($event)" [data]="items"> </app-dynamic-paginator>
+</div>
+
+
+</ng-container>

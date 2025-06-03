@@ -1,0 +1,51 @@
+<div class="row mt--9 mb-3" *ngIf="role"  >
+  <div class="col-12 order-xl-1">
+    <div class="card bg-secondary shadow">
+      <div class="card-header bg-white border-0">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-auto">
+              <h3 class="mb-0 d-inline text-capitalize">ROLE: #<strong>{{ role.id }}</strong> {{ role.name }} </h3>
+            </div>
+            <div class="col-auto ml-auto">
+              <button (click)="onSubmit()" [disabled]="!roleForm.valid || disabled"  class="btn btn-outline-success" type="submit" [disabled]="!roleForm.valid">Salvar <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+            </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form  (ngSubmit)="onSubmit()"  [formGroup]="roleForm" id="roleForms">
+          <div class="pl-lg-12">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="" for="">Role:</label>
+                <input class="form-control" id="" [formControl]="name" type="text">
+                <div class="text-danger" *ngIf="name.errors?.['notUnique']">
+                  O valor {{ name.value }} já existe, por favor edite o existente ou crie com um valor diferente
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="" for="">Permissions:</label>
+                <app-dyamic-select
+                    *ngIf="permissionsList"
+                    [defaultItens]="permissionsList"
+                    [closeOnSelect]="false"
+                    [multiple]="true"
+                    [bindLabel]="'name'"
+                    bindValue="id"
+                    [loading]="loading"
+                    [urlFragment]="'permission'"
+                    [urlGetDataById]="'permission'"
+                    [fieldName]="'name'"
+                    ngDefaultControl
+                    formControlName="permissions"
+                    placeholder="Selecionar Role"
+                ></app-dyamic-select>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<ng-select
+[items]="dynamicDataList"
+[multiple]="multiple"
+[closeOnSelect]="closeOnSelect"
+[hideSelected]="true"
+[bindLabel]="bindLabel"
+bindValue="id"
+[loading]="loading"
+[typeahead]="dataInput"
+[virtualScroll]="true"
+placeholder="Select data"
+(scroll)="onScroll($event)"
+(change)="updateItems($event)"
+[(ngModel)]="selectedItemIdValues"
+>
+</ng-select>
+<div *ngIf="selectedItems" class="text-center">
+   <span *ngFor="let selected of selectedItems" class="badge badge-pill badge-primary ml-2"><a class="text-primary" [routerLink]="'/'+urlGetDataById+'/update/'+selected.id">  {{  selected.name }} </a> </span>
+</div>

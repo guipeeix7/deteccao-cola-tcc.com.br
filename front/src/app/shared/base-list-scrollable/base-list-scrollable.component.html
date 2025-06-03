@@ -1,0 +1,149 @@
+<!--
+  1 - Lista OK -> make as subcomponent 
+  2 - Paginação continua OK -> make as subcomponent
+  3 - aroow pagination OK -> make as subcomponent
+ -->
+
+<nav aria-label="..." class="ml-2">
+  <ul class="pagination mb-0 text-right">
+    <li class="page-item"  >
+      <a class="page-link"  href="javascript:void(0)" tabindex="-1" (click)="prevInQueue()">
+        <i class="fas fa-angle-left"></i>
+        <span class="sr-only">Anterior</span>
+      </a>
+    </li>
+    <li class="page-item" >
+      <a class="page-link" href="javascript:void(0)" [attr.disabled]="loading ? '' :  null" (click)="nextInQueue()">
+      <i class="fas fa-angle-right"></i>
+        <span class="sr-only">Proxima</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
+  <div class="card ml-xl-2 ml-lg-2 mb-3 mt-xl-0 mt-lg-5 mt-md-5 mt-sm-5">
+    <div class="card-body pb-0">
+      <app-search-table (searchEmitter)="searchDatabase($event)">
+        <ng-content search> </ng-content>
+      </app-search-table>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <a routerLink="./../create"  class="btn btn-success btn-round mb-2"> <i class="fas fa-plus"></i> Adicionar Resumo</a>
+  </div>
+
+  <div class="card-section ml-xl-2 ml-lg-2 mt-2" *ngIf="dataList" (scroll)="onScroll($event)">
+    <!-- Content projection here -->
+
+
+    <div class="text-center pt-4 mb-4">
+      <button [attr.disabled]=" loading ? 'disabled' :  ''" class="btn-outline-info btn btn-sm"> Ver mais <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="mt--8">
+  <div class="row">
+    <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12" style="height: 76vh">
+      <div class="main-card">
+        <div class="card below-card bg-info shadow" >
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <h6 class="card-subtitle mb-2 text-muted"></h6>
+            <p class="card-text">
+            </p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card above-card shadow">
+          <div class="card-body">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-xl-10 col-lg-10 col-md-9 col-sm-9">
+                  <h3 class="card-title"> {{ currentItem.nome }} <i class="fas fa-light fa-share"></i></h3>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <ng-container *ngFor="let assunto of currentItem.assuntos">
+                      <span class="badge badge-info">{{ assunto.nome }}</span>
+                    </ng-container>
+                    <ng-container *ngIf="!currentItem.assuntos.length">
+                      <span class="text-muted">
+                        Sem assuntos relacionados
+                      </span>
+                    </ng-container>
+                  </h6>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3">
+                  <div class="text-right">
+                    <nav aria-label="..." class="ml-2">
+                      <ul class="pagination mb-0 text-right">
+                        <li class="page-item"  >
+                          <a class="page-link"  href="javascript:void(0)" tabindex="-1" (click)="prevInQueue()">
+                            <i class="fas fa-angle-left"></i>
+                            <span class="sr-only">Anterior</span>
+                          </a>
+                        </li>
+                        <li class="page-item" >
+                          <a class="page-link" href="javascript:void(0)" [attr.disabled]="loading ? '' :  null" (click)="nextInQueue()">
+                          <i class="fas fa-angle-right"></i>
+                            <span class="sr-only">Proxima</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+
+              </div>
+              <div class="action-buttons text-center">
+                <div class="btn btn-round btn-outline btn-danger" (click)="destroyElement(currentItem.id, 'resumo')" ngbTooltip="Deletar">
+                  <i class="fas fa-trash"></i>
+                </div>
+                <div class="btn btn-round btn-outline btn-info" routerLink="./../update/{{ currentItem.id }}" ngbTooltip="Editar">
+                  <i class="fas fa-pencil-ruler"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="card-text"  [innerHTML]=" this.currentItem.texto">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
+      <div class="card ml-xl-2 ml-lg-2 mb-3 mt-xl-0 mt-lg-5 mt-md-5 mt-sm-5">
+        <div class="card-body pb-0">
+          <app-search-table (searchEmitter)="searchDatabase($event)">
+            <ng-content search> </ng-content>
+          </app-search-table>
+
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a routerLink="./../create"  class="btn btn-success btn-round mb-2"> <i class="fas fa-plus"></i> Adicionar Resumo</a>
+      </div>
+
+      <div class="card-section ml-xl-2 ml-lg-2 mt-2" *ngIf="dataList" (scroll)="onScroll($event)">
+        <ng-container *ngFor="let resumo of dataList['data']">
+          <div class="card text-white bg-info mb-3 shadow-sm" (click)="selectResumo(resumo.id)">
+            <div class="card-header text-white bg-info pb-1 mb-1" >
+              <h5 class="card-title text-white">{{ resumo.nome | TrucanteString:[20, '...']  }}</h5>
+            </div>
+            <div class="card-body pt-1">
+              <small> {{ resumo.texto | TrucanteString:[150, '...']  }} </small>
+            </div>
+          </div>
+        </ng-container>
+        <div class="text-center pt-4 mb-4">
+          <button [attr.disabled]=" loading ? 'disabled' :  ''" class="btn-outline-info btn btn-sm">Ver mais <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

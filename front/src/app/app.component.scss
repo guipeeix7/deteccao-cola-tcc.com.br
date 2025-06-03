@@ -1,0 +1,23 @@
+
+.ng-select {
+  .ng-select-container {
+    min-height: 43px !important;
+	}
+}
+
+:host ::ng-deep .badge{
+  word-break: break-all !important;
+  white-space: break-spaces;
+  p ,h1, h2, h3, h4, h5{
+    margin:0px!important;
+    // font-size: 0.6rem;
+  }
+}
+
+:host ::ng-deep .main-content{
+  background-color: #f7f7f8!important;
+}
+
+:host ::ng-deep .main-content.auth-page{
+  background-color: #1B4486!important;
+}

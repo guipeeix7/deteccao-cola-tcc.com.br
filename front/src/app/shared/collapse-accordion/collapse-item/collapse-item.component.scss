@@ -1,0 +1,27 @@
+.btn:not(:disabled):not(.disabled):active:focus, .btn:not(:disabled):not(.disabled).active:focus {
+  box-shadow: none;
+}
+.card-header {
+  border-radius: 20px;
+  border-bottom: none;
+  background-color: #fdfdfd;
+}
+.card{
+  border-radius: 22px 0px 22px 0px ;
+}
+
+.btn:focus, .btn.focus {
+  outline: 0;
+  box-shadow: none;
+}
+.btn-link:active {
+  text-decoration: none;
+}
+.btn:focus, .btn.focus {
+  outline: 0;
+  box-shadow: none;
+}
+.card-body{
+  border-top: 1px solid #ccc3!important;
+
+}

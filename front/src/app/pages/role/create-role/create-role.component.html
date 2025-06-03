@@ -1,0 +1,40 @@
+
+<div class="row mt--9 mb-3">
+  <div class="col-12 order-xl-1">
+    <div class="d-flex flex-row-reverse">
+      <button class="btn  text-end mb-4 btn-primary">
+        <i class="fas fa-angle-left"></i>
+        voltar
+      </button>
+    </div>
+    
+    <div class="card bg-secondary shadow">
+      <div class="card-header bg-white border-0">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-auto">
+            <h3 class="mb-0 d-inline text-capitalize">Criar Role </h3>
+          </div>
+          <div class="col-auto ml-auto">
+            <button (click)="onSubmit()" [disabled]="!roleForms.valid || disabled"  class="btn btn-outline-success" type="submit" form="roleForms" [disabled]="!roleForms.valid">Salvar <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()"  [formGroup]="roleForms" id="roleForms">
+          <div class="pl-lg-4">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label class="" for="role-name">Nome Role:</label>
+                <input class="form-control" id="role-name" [formGroup]="roleForms" [formControl]="name" urlFragment="'role-verify-name'" type="text" >
+                <div class="text-danger" *ngIf="name.errors?.['notUnique']">
+                  O valor {{ name.value }} já existe, por favor edite o existente ou crie com um valor diferente
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

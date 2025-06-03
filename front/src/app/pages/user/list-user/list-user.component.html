@@ -1,0 +1,69 @@
+<div class="mt--9 mb-3">
+  <div class="card mt-4">
+    <div class="card-body" *ngIf="usersData">
+      <app-dynamic-table
+        (searchEmitter)="filterQuery($event)"
+        (paginatorEmitter)="changePage($event)"
+        [items]="usersData"
+        customId="id"
+        searchable="name"
+        tableName="Usuários"
+          [roleName]="'usuario'"
+          [filter]="[
+            'cpf',
+            'dataNascimento',
+            'status',
+            'lastIpAddress',
+            'fotoPerfil',
+            'professor',
+            'aluno'
+        ]"
+        createUrl="create-user"
+        [urlFragment]="'user'"
+        [autoLoad]="false"
+        [deleteOption]="true"
+      >
+        <div search class="my-4">
+
+          <div class="form-group pt-3">
+            <input
+              type="text"
+              id="input-first-name"
+              (change)="emailQuery($event.target.value)"
+              class="form-control"
+              placeholder="Email"
+            />
+          </div>
+
+
+          <select
+            class="form-control"
+            (change)="statusQuery($event.target.value)"
+          >
+            <option value="">Todos status</option>
+            <option value="1" [selected]="true">Ativo</option>
+            <option value="0">Inativo</option>
+            <option value="-1">Sol. Exclusão</option>
+          </select>
+
+        </div>
+      </app-dynamic-table>
+    </div>
+  </div>
+
+
+  <div *ngIf="showLoad">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-muted mb-4">
+          Usuários
+        </h3>
+        <div class="text-center">
+          <app-loader></app-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

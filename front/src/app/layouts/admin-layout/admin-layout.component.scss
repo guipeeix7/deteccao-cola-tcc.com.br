@@ -1,0 +1,26 @@
+$background-color_1: #1f1f1fdb;
+div.modal {
+	background-color: $background-color_1 !important;
+}
+$background-color_1: #1f1f1fdb;
+:host ::ng-deep div.modal {
+	background-color: $background-color_1 !important;
+}
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 200px !important;
+}
+
+
+@media (min-width: 768px) {
+	.main-content.collapsed{
+    margin-left:86px;
+    // -webkit-transition: all 0.6s linear;
+    // -moz-transition: all 0.6s linear;
+    // -o-transition: all 0.6s linear;
+    // transition: all 0.6s linear;
+  }
+}
+.collapsed {
+  // margin-left: 0px!important;
+  // left:0;
+}

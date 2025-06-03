@@ -1,0 +1,14 @@
+<div class="card mb-2">
+  <div class="card-header" (click)="toggleCollapsable()" id="headingOne">
+    <h5 class="mb-0">
+      <button [innerHTML]="name" class="btn btn-link text-left" data-toggle="collapse" [attr.aria-expanded]="isCollapsed" aria-controls="collapseOne">
+        {{ name }}
+      </button>
+    </h5>
+  </div>
+  <div  class="collapse" [class.show]="isCollapsed" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body">
+      <ng-content>  </ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+#navbar-main{
+  // z-index: 16;
+}
+
+@media (max-width: 767.98px) {
+  #navbar-main {
+    display: none !important;
+  }
+
+  .nav-item{
+    display: none !important;
+  }
+}

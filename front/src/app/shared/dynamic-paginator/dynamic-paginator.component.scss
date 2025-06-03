@@ -1,0 +1,7 @@
+nav {
+  display: inline-block;
+}
+a.page-link[disabled]{
+  cursor: not-allowed !important;
+  background-color:#cacaca !important;
+}

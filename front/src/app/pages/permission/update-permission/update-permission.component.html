@@ -1,0 +1,38 @@
+<div class="row mt--9 mb-3" *ngIf="permission"  >
+  <div class="col-12 order-xl-1">
+    <div class="card bg-secondary shadow">
+      <div class="card-header bg-white border-0">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-auto">
+            <h3 class="mb-0 d-inline text-capitalize">{{ permission.name }} </h3>
+          </div>
+          <div class="ml-auto">
+            <button (click)="onSubmit()" [disabled]="!permissionForm.valid || disabled"  class="btn btn-outline-success" type="submit" [disabled]="!permissionForm.valid">Salvar <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form  (ngSubmit)="onSubmit()"  [formGroup]="permissionForm" id="permissionForms">
+          <div class="pl-lg-4">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="" for="">Permission:</label>
+                <input class="form-control" id="" [formControl]="name" type="text">
+                <div class="text-danger" *ngIf="name.errors?.['notUnique']">
+                  O valor {{ name.value }} já existe, por favor edite o existente ou crie com um valor diferente
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="" for="">Roles:</label>
+                <br>
+                <span *ngFor="let item of rolesList">
+                  <a [routerLink]="'/role/update/'+item.id"><span class="badge badge-primary p-1 m-1">{{ item.name }}</span></a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

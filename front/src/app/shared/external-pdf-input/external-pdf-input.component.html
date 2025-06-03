@@ -1,0 +1,6 @@
+<input type="text" (blur)="onTouched()" (change)="customChange($event.target.value)" class="form-control">
+<br>
+<div>
+  <!-- <app-progress-bar *ngIf="progress>0" [progress]="progress"> </app-progress-bar> -->
+  <app-pdf-preview [src]="src"></app-pdf-preview>
+</div>

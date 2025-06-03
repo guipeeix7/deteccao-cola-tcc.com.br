@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="card mt--8 mr-xl-5 mr-lg-5 mr-md-6 mr-sm-3  ml-xl-5 ml-lg-6 ml-md-6 ml-sm-3  mb-4">
+    <div class="card-header text-center">
+     <h1 class="text-dark">
+       Cursos
+     </h1>
+    </div>
+    <div class="card-body">
+      <app-search-table (searchEmitter)="searchDatabase($event)">
+        <ng-content search> </ng-content>
+      </app-search-table>
+    </div>
+  </div>
+
+  <div class="container mb-3">
+    <div class="row" *ngIf="dataList['data']">
+      <div
+        *ngFor="let item of dataList['data']"
+        class="col-xl-4 col-lg-6 col-md-6 col-sm-12"
+      >
+        <app-curso-item [item]="item"></app-curso-item>
+      </div>
+    </div>
+  </div>
+  <div class="ml-6">
+    <app-dynamic-paginator
+      (searchEmitter)="searchDatabase($event)"
+      (paginatorEmitter)="changePage($event)"
+      [data]="dataList"
+    >
+    </app-dynamic-paginator>
+  </div>
+</div>

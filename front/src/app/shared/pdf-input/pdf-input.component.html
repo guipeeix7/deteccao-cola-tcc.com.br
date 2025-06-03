@@ -1,0 +1,4 @@
+<input class="form-control-file" type="file" (change)="onFileChange($event)">
+<br>
+<app-pdf-preview *ngIf="src && isPdf" [src]="src"></app-pdf-preview>
+

@@ -1,0 +1,4 @@
+<button [disabled]="disabled || loading" type="button" class="btn btn-{{ color }} btn-{{ size }} {{ type }}"> {{ message }} 
+    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+    <ng-content *ngIf="!loading"></ng-content>
+</button>

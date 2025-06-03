@@ -1,0 +1,86 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
+    <h6 class="heading-small text-muted mb-4">
+      Informações de usuário
+    </h6>
+    <div class="form-group">
+      <label for="email"> Email </label>
+      <input
+        type="text"
+        required
+        [formControl]="email"
+        name="email"
+        id="email"
+        placeholder="joao@gmail.com"
+        class="form-control"
+        value="{{ email }}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="name"> Nome completo </label>
+      <input
+        type="text"
+        required
+        id="input-first-name"
+        [formControl]="name"
+        class="form-control form-control-alternative"
+        placeholder="Nome"
+      />
+    </div>
+    <div class="form-group">
+      <label for="identificationNumber"> CPF </label>
+      <input
+        type="text"
+        cpfValidator
+        required
+        id="input-first-name"
+        [formControl]="CPF"
+        class="form-control form-control-alternative"
+        placeholder="Ex: 00000000008, deve ser sem pontuacao"
+      />
+      <div *ngIf="CPF.invalid && CPF.touched">
+        <div *ngIf="CPF.errors.pattern">
+          <span class="text-danger">
+            O cpf digita parece nao ser válido, verifique se o mesmo
+            possui 11 digitos.
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="telefone"> Telefone </label>
+      <input
+        type="text"
+        required
+        name="telefone"
+        [formControl]="telefone"
+        id="telefone"
+        mask="(00) 00000-0000"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email"> Senha </label>
+      <input
+        type="text"
+        required
+        [formControl]="password"
+        name="password"
+        id="password"
+        placeholder="**********"
+        class="form-control"
+      />
+      <small class="text-danger">Deixe o campo em branco para manter a mesma senha</small>
+    </div>
+    <div class="form-group">
+      <label for="email"> Confirmar senha </label>
+      <input
+        type="text"
+        required
+        [formControl]="password_confirmation"
+        name="password_confirmation"
+        id="password_confirmation"
+        placeholder="**********"
+        class="form-control"
+      />
+    </div>
+  </form>

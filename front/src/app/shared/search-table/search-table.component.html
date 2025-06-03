@@ -1,0 +1,14 @@
+
+<div class="row justify-content-center">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <input type="search" name="query" #query class="form-control rounded"  (keyup.enter)="searchDatabase(query.value)" placeholder="Pesquisar" aria-label="Search" aria-describedby="search-addon" />
+      </div>
+      <div class="input-group-append">
+        <button class="btn btn-primary custom" (click)="searchDatabase(query.value)" type="button"> <i class="fa fa-search" aria-hidden="true"></i>  </button>
+      </div>
+    </div>
+    <ng-content select="[search]"></ng-content>
+  </div>
+</div>

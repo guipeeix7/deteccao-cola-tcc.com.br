@@ -1,0 +1,124 @@
+<div class="header bg-gradient-success py-8 py-lg-8">
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container mt--6 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="card-header bg-transparent pb-5">
+            <div class="text-muted text-center mt-2 mb-3"><small>Registrar-se</small></div>
+            <div class="btn-wrapper text-center">
+              <h2> TCC-UNB </h2>
+            </div>
+          </div>
+          <form [formGroup]="registerForm" >
+            <div class="form-group">
+              <label for="emailInput"> Nome: </label><br>
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" formControlName="name" placeholder="Ex: Jhon Doe" type="text">
+              </div>
+
+              <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="alert alert-danger">
+                <div *ngIf="name.errors?.['required']">
+                  Nome é um campo obrigatório
+                </div>
+                <div *ngIf="name.errors?.['minlength']">
+                  O nome deve possuir pelo menos 4 caracteres
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="emailInput"> Email: </label><br>
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <input class="form-control" formControlName="email" placeholder="Ex: user@dominio.com" type="email">
+              </div>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="alert alert-danger">
+                <div *ngIf="email.errors?.['required']">
+                  Email é um campo obrigatório.
+                </div>
+                <div *ngIf="email.errors?.['minlength']">
+                  O email deve possuir pelo menos 6 caracteres.
+                </div>
+                <div *ngIf="email.errors?.['email']">
+                  O email inserido é inválido
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="emailInput"> Senha: </label><br>
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" formControlName="password" placeholder="Ex: suaSenha" type="password">
+              </div>
+
+              <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                  class="alert alert-danger">
+                <div *ngIf="password.errors?.['required']">
+                  Senha é um campo obrigatório
+                </div>
+                <div *ngIf="password.errors?.['minlength']">
+                  A senha deve possuir pelo menos 6 caracteres
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="emailInput"> Repetir senha: </label><br>
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" formControlName="password_confirmation" placeholder="Ex: suaSenha" type="password">
+              </div>
+
+              <div *ngIf="password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched)"
+                  class="alert alert-danger">
+                <div *ngIf="password_confirmation.errors?.['required']">
+                  Senha é um campo obrigatório
+                </div>
+                <div *ngIf="password_confirmation.errors?.['minlength']">
+                  A senha deve possuir pelo menos 6 caracteres
+                </div>
+              </div>
+
+            </div>
+            <div *ngIf="registerForm.errors?.['notSamePassword'] && ((password.touched && password_confirmation.touched) || (password.dirty && password_confirmation.dirty))" class="cross-validation-error-message alert alert-danger">
+              As senhas não coincidem
+            </div>
+            <!-- <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div> -->
+            <div class="row my-4">
+              <div class="col-12">
+                <div class="custom-control custom-control-alternative custom-checkbox">
+                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                  <label class="custom-control-label" for="customCheckRegister">
+                    <span class="text-muted">Eu concordo com os termos de <a href="#!">Politica de privacidade</a></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <app-progress-button class="mt-4" [disabled]="!registerForm.valid || disabled" [loading]="loading" (click)="onSubmit()" [message]="'Criar conta '"> </app-progress-button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

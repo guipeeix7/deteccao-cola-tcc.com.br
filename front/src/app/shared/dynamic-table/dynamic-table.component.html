@@ -1,0 +1,132 @@
+<section class="table-custom-header">
+  <div class="row justify-content-between align-items-center mb-4">
+    <div class="col-auto">
+      <h2 class="text-muted my-auto">
+        {{ tableName }}
+      </h2>
+    </div>
+    <div class="col-auto ml-auto" *ngIf="'create '+roleName | guard">
+      <div *ngIf="createOption != false">
+        <a class="btn btn-success btn-round btn-small" [routerLink]="['create']">  <i class="fa fa-solid fa-plus"></i> </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app-table-search">
+  <app-search-table *ngIf="('read '+roleName | guard) && searchEnabled == true" (searchEmitter)="searchDatabase($event)">
+    <ng-content search>
+    </ng-content>
+  </app-search-table>
+</section>
+
+<ng-container *ngIf="itemValues">
+  <app-dynamic-paginator (searchEmitter)="searchDatabase($event)" (paginatorEmitter)="changePage($event)" [data]="items"> </app-dynamic-paginator>
+</ng-container>
+<!-- <hr> -->
+<section class="app-table-content">
+  <ng-container *ngIf="'read '+roleName | guard">
+
+    <div class="table-responsive custom" *ngIf="dataLoaded | async"  >
+      <table  class="table align-items-center table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-left" *ngIf="('update '+roleName | guard) || ('delete '+roleName | guard)">
+              Ações
+            </th>
+            <th scope="col" class="text-center" *ngFor="let label of labels">
+                {{ label }}
+            </th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="noDataFound==false; else elseBlock">
+          <tr *ngFor="let itemValue of itemValues">
+            <td class="text-left" [ngClass]="showLoad ? 'loading' : 'ready'" *ngIf="('update '+roleName | guard) || ('delete '+roleName | guard)" >
+              <span>
+                <button class="btn btn-sm btn-outline-primary" *ngIf="'update '+roleName | guard" routerLink="update/{{ itemValue.id }}" >
+                  <i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm" *ngIf="('delete '+roleName | guard) && (deleteOption == true) "  (click)="destroyRow(itemValue.id)">
+                  <i class="fa fa-trash fa-fw"></i>
+                </button>
+              </span>
+            </td>
+            <td [ngClass]="showLoad ? 'loading' : 'ready'"  class="text-center" *ngFor="let value of objectValues(itemValue)">
+              <p *ngIf="!isHtml">{{ value ? (value | TrucanteString:[30, '...']) : '--------------' }} </p>
+              <p *ngIf="isHtml">{{ value | TrucanteString:[90, '...'] }}</p>
+              <span></span>
+            </td>
+          </tr>
+        </tbody>
+        <ng-template #elseBlock>
+          <tbody> </tbody>
+        </ng-template>
+      </table>
+
+      <div *ngIf="noDataFound==true"  class="row justify-content-center align-items-center  pt-4">
+        <div class="col-12 text-center align-self-center">
+          <h1 class="text-muted">
+            Sem dados
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-xl-none d-lg-none d-md-none d-sm-block mobile" *ngIf="dataLoaded | async"  >
+      <ng-container *ngIf="noDataFound==false;">
+
+        <div *ngFor="let itemValue of itemValues" style="border: 1px solid #ccc!important;border-radius: 25px;" class="mb-2 py-2 px-3">
+          <div [ngClass]="showLoad ? 'loading' : 'ready'"   class="text-left" *ngFor="let value of objectValues(itemValue); let i = index;">
+            <strong >
+              {{ labels[i] | TrucanteString:[10, '.'] }}:
+            </strong>
+
+            <span class="mobile-value" [ngClass]="showLoad ? 'loading' : 'ready'" >
+              <span class="span-value">
+                {{ value | TrucanteString:[30, '...'] }}
+              </span>
+              <span></span>
+            </span>
+          </div>
+          <div class="text-right">
+            <hr class="my-1">
+            <div class="text-right mt-2" [ngClass]="showLoad ? 'loading' : 'ready'" *ngIf="('update '+roleName | guard) || ('delete '+roleName | guard)" >
+                <button class="btn btn-sm btn-outline-primary" *ngIf="'update '+roleName | guard" routerLink="update/{{ itemValue.id }}" >
+                  <i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm" *ngIf="('delete '+roleName | guard) && (deleteOption == true) " (click)="destroyRow(itemValue.id)">
+                  <i class="fa fa-trash fa-fw"></i>
+                </button>
+                <ng-content additionalAction>
+                </ng-content>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div *ngIf="noDataFound==true"  class="row justify-content-center align-items-center  pt-4">
+        <div class="col-12 text-center align-self-center">
+          <h1 class="text-muted">
+            Sem dados
+          </h1>
+        </div>
+      </div>
+
+    </div>
+
+  <div *ngIf="!dataLoaded">
+    <div class="text-center">
+      <app-loader></app-loader>
+    </div>
+  </div>
+  <br>
+
+
+    <ng-container *ngIf="itemValues">
+      <app-dynamic-paginator (searchEmitter)="searchDatabase($event)" (paginatorEmitter)="changePage($event)" [data]="items"> </app-dynamic-paginator>
+
+    </ng-container>
+  </ng-container>
+
+</section>
+<!--  -->

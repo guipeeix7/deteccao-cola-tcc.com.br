@@ -1,0 +1,7 @@
+<input class="form-control-file" type="file">
+<br>
+<div >
+  <app-progress-bar *ngIf="progress>0" [progress]="progress"> </app-progress-bar>
+  <br>
+  <app-video-preview *ngIf="preview" [preview]="preview"></app-video-preview>
+</div>

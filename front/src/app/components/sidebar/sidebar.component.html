@@ -1,0 +1,198 @@
+<nav
+  [ngClass]="sideBarCollapsed ? 'hidden' : ''"
+  class="text-white"
+  class="navbar navbar-vertical navbar-expand-md navbar-light bg-white"
+  id="sidenav-main"
+  >
+  <!-- (mouseenter) ="hideSideBar() "  (mouseleave) ="expandSideBar()" -->
+  <div class="container">
+    <!-- Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="isCollapsed = !isCollapsed"
+      aria-controls="sidenav-collapse-main"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Brand -->
+    <div>
+      <div class="row align-items-center">
+        <div class="col nav-brand" [ngClass]="sideBarCollapsed ? 'hidden' : ''">
+          <a
+            class="navbar-brand pt-0"
+            routerLinkActive="active"
+            [routerLink]="['/dashboard']"
+          >
+            <img
+              [src]="'storage/'+userInfo.fotoPerfil | apiUrl"
+              class="navbar-brand-img"
+              alt="{{userInfo.nome}}"
+              style="color:#fff"
+            />
+          </a>
+        </div>
+
+        <div class="col w-100 d-flex align-items-center justify-content-center">
+          <!-- User Name -->
+          <!-- <span class="mr-2 font-weight-bold" *ngIf="userInfo.name">{{ userInfo.name }}</span> -->
+
+          <!-- User Image -->
+          <img
+            *ngIf="userInfo.image"
+            [src]="userInfo.image"
+            class="rounded-circle"
+            alt="User Avatar"
+            width="40"
+            height="40"
+          />
+
+          <!-- Sidebar Toggle Icon -->
+          <a class="nav-link partial_sidebar" (click)="partialHideSideBar()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- User -->
+    <ul class="nav align-items-center d-md-none">
+
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a class="nav-link" role="button" ngbDropdownToggle>
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle bg-white">
+              <!-- <img
+                alt="Image placeholder"
+                src="./assets/img/theme/team-1-800x800.jpg"
+              /> -->
+              <i class="fas fa-user-cog text-muted "></i>
+
+            </span>
+          </div>
+        </a>
+        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <div class="dropdown-header noti-title">
+            <h6 class="text-overflow m-0">Welcome!</h6>
+          </div>
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/user/my-account']"
+            class="dropdown-item"
+          >
+            <i class="ni ni-single-02"></i>
+            <span>My profile</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="javascript:void(0)" (click)="logout()" class="dropdown-item">
+            <i class="ni ni-user-run"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+    <!-- Collapse -->
+    <div
+      class="collapse navbar-collapse"
+      [ngbCollapse]="isCollapsed"
+      id="sidenav-collapse-main"
+    >
+      <!-- Collapse header -->
+      <div class="navbar-collapse-header d-md-none">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a routerLinkActive="active" [routerLink]="['/dashboard']">
+              <img [src]="'storage/'+userInfo.fotoPerfil | apiUrl" />
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button
+              type="button"
+              class="navbar-toggler"
+              (click)="isCollapsed = !isCollapsed"
+            >
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Form -->
+      <form class="mt-4 mb-3 d-md-none">
+        <div class="input-group input-group-rounded input-group-merge">
+          <input
+            type="search"
+            class="form-control form-control-rounded form-control-prepended"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <span class="fa fa-search"></span>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- Navigation -->
+      <ul class="navbar-nav">
+        <ng-container *ngFor="let menuItem of menuItems">
+          <li *ngIf="menuItem.permission | guard" [attr.aria-expanded]="!subMenuColapsed" class="{{ menuItem.class }} nav-item"  >
+            <a routerLinkActive="active"
+              [routerLink]="[menuItem.path]"
+              class="nav-link text-white"
+              [ngClass]="{
+                'd-flex align-items-center justify-content-center': sideBarCollapsed
+              }"
+              (click)="menuItem.subRoute ? showSubMenu(menuItem.path) : ''"
+              >
+              <i class="{{ menuItem.icon }} text-center" tooltipClass="tooltip-custom-class" ngbTooltip="{{ menuItem.title }}" ></i>
+              <span class="lateral-menu-title" [ngClass]="sideBarCollapsed ? 'hidden' : ''" > {{ menuItem.title }}
+                <span *ngIf="menuItem.subRoute" class="text-right" >
+                    <i class="fas" [class]="subMenuColapsed[menuItem.path] == true ?  'fa-chevron-left' : 'fa-chevron-down'">
+                    </i>
+                </span>
+              </span>
+            </a>
+            <ng-container *ngIf="menuItem.subRoute" [(ngbCollapse)]="subMenuColapsed[menuItem.path]">
+              <div class="collapse" [class.show]="subMenuColapsed[menuItem.path]" id="pagesExamples">
+                <ul class="nav">
+                  <ng-container  *ngFor="let subItem of menuItem.subRoute">
+                    <ng-container *ngIf="subItem.permission | guard">
+                    <li class="nav-item">
+                      <a class="nav-link" [routerLink]="[subItem.path]">
+                        <i class="ni {{ subItem.icon }} text-center"></i>
+                        <span class="sidebar-mini">  {{ subItem.title }} </span>
+                      </a>
+                    </li>
+                  </ng-container>
+                  </ng-container>
+                </ul>
+              </div>
+            </ng-container>
+          </li>
+        </ng-container>
+      </ul>
+      <!-- Divider -->
+      <!-- <hr class="my-3"> -->
+      <!-- Heading -->
+      <!-- <h6 class="navbar-heading text-muted">Documentation</h6>
+      <ul class="navbar-nav mb-md-3">
+        <li class="nav-item">
+          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard-angular/documentation/tutorial">
+            <i class="ni ni-spaceship"></i> Getting started
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard-angular/documentation/colors">
+            <i class="ni ni-palette"></i> Foundation
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard-angular/documentation/alerts">
+            <i class="ni ni-ui-04"></i> Components
+          </a>
+        </li>
+      </ul>-->
+    </div>
+  </div>
+</nav>

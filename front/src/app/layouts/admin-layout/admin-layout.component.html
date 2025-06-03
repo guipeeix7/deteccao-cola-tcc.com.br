@@ -1,0 +1,19 @@
+<!-- Sidenav -->
+<app-sidebar (emitSideBarCollapsed)="expandMainContent($event)"></app-sidebar>
+<div class="main-content" [ngClass]="mainContentCollapsed ? 'collapsed' : ''">
+  <!-- Top navbar -->
+  <app-navbar ></app-navbar>
+  <!-- Pages -->
+  <div class="header pb-8 pt-5 pt-md-8">
+    <div class="container">
+      <div class="header-body"></div>
+    </div>
+  </div>
+  <div class="mx-6">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="container">
+    <app-footer></app-footer>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<div class="text-danger"  *ngIf="!value"> <small> Url inválida </small> </div>
+<input class="form-control" (change)="transformUrl($event)" [value]="value" type="text">
+<br>
+<app-external-video-preview *ngIf="value!='' && !invalid" [url]="value"> </app-external-video-preview>

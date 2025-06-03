@@ -1,0 +1,42 @@
+<div class="header bg-gradient-success py-8 py-lg-8">
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container mt--6 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="card-header bg-transparent pb-5">
+            <div class="text-muted text-center mt-2 mb-3"><h1>Esqueceu sua senha?</h1></div>
+            <div class="btn-wrapper text-center">
+              <h3 class="text-muted"> TCC-UNB </h3>
+            </div>
+          </div>
+            <div class="container" >
+              <form [formGroup]="resetRequestFb" class="form-signin">
+                <p class="text-center">Insira seu endereço de email para trocar sua senha.</p>
+                <div class="form-group">
+                  <label for="inputEmail" class="sr-only">Endereço de Email</label>
+                  <input  type="email" id="inputEmail" class="form-control" placeholder="Endereço de Email" required autofocus
+                        formControlName="email">
+                </div>
+                <div class="text-center">
+                  <!-- [loading]="loading"
+
+                  -->
+                  <app-progress-button (click)="submitEmail()" type="submit" [size]="'lg'" [loading]="true"  [message]="'Em desenvolvimento'"></app-progress-button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
