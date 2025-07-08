@@ -36,7 +36,7 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 
-WORKDIR /var/www/vna-back
+WORKDIR /var/www/tcc-cola
 # RUN su composer install --optimize-autoloader --no-dev
 # RUN php artisan config:cache
 # RUN php artisan event:cache
