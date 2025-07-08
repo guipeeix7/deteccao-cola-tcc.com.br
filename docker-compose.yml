@@ -1,0 +1,44 @@
+
+services:
+  tcc-cola-back:
+    build: ./back
+    container_name: tcc-cola-back
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: tcc-cola-back
+      SERVICE_TAGS: dev
+    working_dir: /var/www/tcc-cola-back
+    volumes:
+      - ./back:/var/www/tcc-cola-back
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - tcc-cola-network
+
+  db-tcc-cola:
+    container_name: tcc-cola
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: <MYSQL_PASS>
+    ports:
+      - 3309:3306
+    networks:
+      - tcc-cola-network
+
+  adminer:
+    container_name: adminer-tcc-cola
+    image: adminer
+    restart: always
+    ports:
+      - 8089:8080
+    networks:
+      - tcc-cola-network
+
+networks:
+  tcc-cola-network:
+    driver: bridge
+volumes:
+  dbdata:
+    driver: local

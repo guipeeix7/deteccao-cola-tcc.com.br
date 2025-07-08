@@ -36,7 +36,7 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 
-WORKDIR /var/www/vna-back
+WORKDIR /var/www/tcc-cola
 # RUN su composer install --optimize-autoloader --no-dev
 # RUN php artisan config:cache
 # RUN php artisan event:cache
@@ -46,42 +46,3 @@ WORKDIR /var/www/vna-back
 
 EXPOSE 9000
 CMD ["php-fpm"]
-# FROM nginx
-# COPY ./default.conf /etc/nginx/conf.d/
-# FROM php:8.1-fpm
-
-# # Install required PHP extensions
-# RUN apt-get install openssl libssl-dev
-
-# RUN apt-get install libcurl4-openssl-dev
-# RUN docker-php-ext-install ctype dom fileinfo filter hash mbstring openssl pdo session tokenizer xml
-
-# CMD ["php-fpm"]
-
-# # You can also expose the PHP-FPM port if needed
-# EXPOSE 8004
-# FROM jsdecena/php8-fpm:8.1.0
-
-# ENV NODE_VERSION=12.6.0
-# RUN apt update && apt install -y curl
-
-# RUN docker-php-ext-install mysqli pdo_mysql gd
-
-# COPY . .
-
-# COPY ./.env ./.env
-
-# RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-# ENV NVM_DIR=/root/.nvm
-
-# RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
-# RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
-# RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
-# ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
-
-# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-# RUN composer require laravel/breeze --dev
-# RUN npm install
-# RUN npm run dev
-# RUN npm i && npm run dev
-# RUN php artisan serve
