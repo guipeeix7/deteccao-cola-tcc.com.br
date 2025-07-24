@@ -34,7 +34,7 @@ jobs:
         run: cd backend && composer install --prefer-dist --no-progress
 
       - name: Check code formatting (PHP CS Fixer)
-        run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+        run: backend/vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
   lint:
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
         run: cd backend && composer install --prefer-dist --no-progress
         
       - name: Run PHPStan analysis
-        run: vendor/bin/phpstan analyse src --level=5
+        run: backend/vendor/bin/phpstan analyse src --level=5
 
   test:
     runs-on: ubuntu-latest
@@ -111,7 +111,7 @@ jobs:
         run: cd ./backend && php artisan migrate --force
 
       - name: Run test suite
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: backend/vendor/bin/phpunit --coverage-clover=coverage.xml
 
   docker-build:
     runs-on: ubuntu-latest
@@ -196,10 +196,10 @@ jobs:
         run: cd ./backend && php artisan migrate --force
 
       - name: Generate PHPStan report
-        run: vendor/bin/phpstan analyse src --level=5 --error-format=json > reports/phpstan-report.json || true
+        run: backend/vendor/bin/phpstan analyse src --level=5 --error-format=json > reports/phpstan-report.json || true
 
       - name: Run tests with coverage
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=reports/phpunit-report.xml
+        run: backend/vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=reports/phpunit-report.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@main
