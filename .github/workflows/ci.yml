@@ -196,7 +196,7 @@ jobs:
         run: cd ./backend && php artisan migrate --force
 
       - name: Generate PHPStan report
-        run: backend/vendor/bin/phpstan analyse app --level=5 --error-format=json > reports/phpstan-report.json || true
+        run: backend/vendor/bin/phpstan analyse ./app --level=5 --error-format=json > reports/phpstan-report.json || true
 
       - name: Run tests with coverage
         run: backend/vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=reports/phpunit-report.xml
