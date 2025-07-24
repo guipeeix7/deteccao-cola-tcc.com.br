@@ -31,7 +31,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress
+        run: ./../backend/composer install --prefer-dist --no-progress
 
       - name: Check code formatting (PHP CS Fixer)
         run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
@@ -57,7 +57,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress
+        run: ./../backend/composer install --prefer-dist --no-progress
         
       - name: Run PHPStan analysis
         run: vendor/bin/phpstan analyse src --level=5
@@ -102,7 +102,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress
+        run: ./../backend/composer install --prefer-dist --no-progress
 
       - name: Copy environment file
         run: cp .env.testing .env
@@ -187,7 +187,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress
+        run: ./../backend/composer install --prefer-dist --no-progress
 
       - name: Copy environment file
         run: cp .env.testing .env
