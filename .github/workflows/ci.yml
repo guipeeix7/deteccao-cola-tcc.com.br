@@ -105,7 +105,7 @@ jobs:
         run: cd backend && composer install --prefer-dist --no-progress
 
       - name: Copy environment file
-        run: cp .env.testing .env
+        run: cd ./backend && cp .env.testing .env
 
       - name: Run database migrations
         run: php artisan migrate --force
@@ -190,7 +190,7 @@ jobs:
         run: cd backend && composer install --prefer-dist --no-progress
 
       - name: Copy environment file
-        run: cp .env.testing .env
+        run: cd ./backend && cp .env.testing .env
 
       - name: Run database migrations
         run: php artisan migrate --force
