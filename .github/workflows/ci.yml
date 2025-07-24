@@ -108,7 +108,7 @@ jobs:
         run: cd ./backend && cp .env.testing .env
 
       - name: Run database migrations
-        run: php artisan migrate --force
+        run: cd ./backend && php artisan migrate --force
 
       - name: Run test suite
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
@@ -193,7 +193,7 @@ jobs:
         run: cd ./backend && cp .env.testing .env
 
       - name: Run database migrations
-        run: php artisan migrate --force
+        run: cd ./backend && php artisan migrate --force
 
       - name: Generate PHPStan report
         run: vendor/bin/phpstan analyse src --level=5 --error-format=json > reports/phpstan-report.json || true
