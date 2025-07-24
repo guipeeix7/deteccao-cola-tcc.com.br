@@ -34,7 +34,7 @@ jobs:
         run: cd backend && composer install --prefer-dist --no-progress
 
       - name: Check code formatting (PHP CS Fixer)
-        run: backend/vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+        run: backend/vendor/bin/php-cs-fixer  fix --config=backend/.php-cs-fixer.php --dry-run --diff --verbose
 
   lint:
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
         run: cd backend && composer install --prefer-dist --no-progress
         
       - name: Run PHPStan analysis
-        run: backend/vendor/bin/phpstan analyse ./app --level=5
+        run: backend/vendor/bin/phpstan analyse ./backend/app --level=5 
 
   test:
     runs-on: ubuntu-latest
