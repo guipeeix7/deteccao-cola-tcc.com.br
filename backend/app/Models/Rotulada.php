@@ -21,22 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Rotulada extends Model
 {
-	protected $table = 'rotulada';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'rotulada';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idQuestao' => 'int',
-		'idOrgao' => 'int'
-	];
+    protected $casts = [
+        'idQuestao' => 'int',
+        'idOrgao' => 'int'
+    ];
 
-	public function orgao()
-	{
-		return $this->belongsTo(ORGAO::class, 'idOrgao');
-	}
+    public function orgao()
+    {
+        return $this->belongsTo(ORGAO::class, 'idOrgao');
+    }
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQuestao');
-	}
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQuestao');
+    }
 }

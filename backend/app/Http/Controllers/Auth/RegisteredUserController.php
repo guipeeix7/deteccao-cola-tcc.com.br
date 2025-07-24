@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
             'fotoPerfil' => 'nullable|string|max:120',
         ]);
         $path = "";
-        if($request->file('fotoPerfil')){
+        if ($request->file('fotoPerfil')) {
             $path = Storage::putFile('users', $request->file('fotoPerfil'));
         }
 
@@ -51,7 +51,8 @@ class RegisteredUserController extends Controller
         return response()->json(['userId' => $user->id]);
     }
 
-    public function linkEmptyStudent($user){
+    public function linkEmptyStudent($user)
+    {
         $user->assignRole('client');
     }
 }

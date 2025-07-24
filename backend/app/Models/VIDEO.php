@@ -23,29 +23,29 @@ use Illuminate\Database\Eloquent\Model;
  */
 class VIDEO extends Model
 {
-	protected $table = 'VIDEO';
-	protected $primaryKey = 'idVideo';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'VIDEO';
+    protected $primaryKey = 'idVideo';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idVideo' => 'int'
-	];
+    protected $casts = [
+        'idVideo' => 'int'
+    ];
 
-	protected $fillable = [
-		'nomeVideo',
-		'caminho',
+    protected $fillable = [
+        'nomeVideo',
+        'caminho',
         'tipoVideo',
         'videoThumb'
-	];
+    ];
 
-	public function acrescenta()
-	{
-		return $this->hasMany(Acrescenta::class, 'idVideo');
-	}
+    public function acrescenta()
+    {
+        return $this->hasMany(Acrescenta::class, 'idVideo');
+    }
 
-	public function incorporas()
-	{
-		return $this->hasMany(Incorpora::class, 'idVideo');
-	}
+    public function incorporas()
+    {
+        return $this->hasMany(Incorpora::class, 'idVideo');
+    }
 }

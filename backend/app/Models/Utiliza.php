@@ -21,22 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Utiliza extends Model
 {
-	protected $table = 'utiliza';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'utiliza';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idConcurso' => 'int',
-		'idProva' => 'int'
-	];
+    protected $casts = [
+        'idConcurso' => 'int',
+        'idProva' => 'int'
+    ];
 
-	public function concurso()
-	{
-		return $this->belongsTo(CONCURSO::class, 'idConcurso');
-	}
+    public function concurso()
+    {
+        return $this->belongsTo(CONCURSO::class, 'idConcurso');
+    }
 
-	public function prova()
-	{
-		return $this->belongsTo(PROVA::class, 'idProva');
-	}
+    public function prova()
+    {
+        return $this->belongsTo(PROVA::class, 'idProva');
+    }
 }

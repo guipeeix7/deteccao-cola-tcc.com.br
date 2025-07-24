@@ -27,7 +27,7 @@ final class CORRECAOFactory extends Factory
     public function definition(): array
     {
         $professor = (\App\Models\PROFESSOR::inRandomOrder()->first()->idProfessor == null) ?
-                              \App\Models\PROFESSOR::factory()->create():
+                              \App\Models\PROFESSOR::factory()->create() :
                               \App\Models\PROFESSOR::inRandomOrder()->first();
         return [
             'textoCorrecao' => fake()->paragraph(3),

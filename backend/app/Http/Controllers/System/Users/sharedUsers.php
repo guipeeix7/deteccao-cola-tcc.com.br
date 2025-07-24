@@ -12,5 +12,4 @@ use App\Http\Controllers\System\UserController;
 
 class sharedUsers
 {
-
 }

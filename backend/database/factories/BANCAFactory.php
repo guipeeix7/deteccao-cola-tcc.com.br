@@ -27,7 +27,7 @@ final class BANCAFactory extends Factory
     public function definition(): array
     {
         return [
-            'idBanca' => \App\Models\BANCA::orderBy('idBanca','desc')->first()->idBanca+1,
+            'idBanca' => \App\Models\BANCA::orderBy('idBanca', 'desc')->first()->idBanca + 1,
             'nomeBanca' => fake()->lexify('banca-?????????????????'),
             'siglaBanca' => fake()->lexify('banca-???'),
             'imagem' => fake()->imageUrl(640, 480, 'brands', true),

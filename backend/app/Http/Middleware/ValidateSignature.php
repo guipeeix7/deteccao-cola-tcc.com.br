@@ -30,6 +30,6 @@ class ValidateSignature extends Middleware
             return $next($request);
         }
 
-        throw new InvalidSignatureCustomException;
+        throw new InvalidSignatureCustomException();
     }
 }

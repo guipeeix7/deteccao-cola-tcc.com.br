@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+
 /**
  * Class Responde
  *
@@ -24,36 +25,36 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Responde extends Model
 {
-	protected $table = 'responde';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'responde';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idAluno' => 'int',
-		'idQuestao' => 'int',
-		'data' => 'date',
-		// 'hora' => 'time',
-		'idUser' => 'int',
+    protected $casts = [
+        'idAluno' => 'int',
+        'idQuestao' => 'int',
+        'data' => 'date',
+        // 'hora' => 'time',
+        'idUser' => 'int',
         'resposta' => 'int',
         'idProva' => 'int'
-	];
+    ];
 
-	protected $fillable = [
-		'resposta',
-		'date',
-		'time',
+    protected $fillable = [
+        'resposta',
+        'date',
+        'time',
         'idProva'
-	];
+    ];
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQuestao');
-	}
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQuestao');
+    }
 
-	public function aluno()
-	{
-		return $this->belongsTo(ALUNO::class, 'idAluno')
-					->where('ALUNO.idAluno', '=', 'responde.idAluno')
-					->where('ALUNO.idUser', '=', 'responde.idUser');
-	}
+    public function aluno()
+    {
+        return $this->belongsTo(ALUNO::class, 'idAluno')
+                    ->where('ALUNO.idAluno', '=', 'responde.idAluno')
+                    ->where('ALUNO.idUser', '=', 'responde.idUser');
+    }
 }

@@ -21,17 +21,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ModelHasPermission extends Model
 {
-	protected $table = 'modelhaspermissions';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'modelhaspermissions';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'permissionid' => 'int',
-		'modelid' => 'int'
-	];
+    protected $casts = [
+        'permissionid' => 'int',
+        'modelid' => 'int'
+    ];
 
-	public function permission()
-	{
-		return $this->belongsTo(Permission::class);
-	}
+    public function permission()
+    {
+        return $this->belongsTo(Permission::class);
+    }
 }

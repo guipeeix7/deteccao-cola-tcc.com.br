@@ -23,22 +23,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Integra extends Model
 {
     use HasFactory;
-	protected $table = 'integra';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'integra';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idModulo' => 'int',
-		'idPdf' => 'int'
-	];
+    protected $casts = [
+        'idModulo' => 'int',
+        'idPdf' => 'int'
+    ];
 
-	public function modulo()
-	{
-		return $this->belongsTo(MODULO::class, 'idModulo');
-	}
+    public function modulo()
+    {
+        return $this->belongsTo(MODULO::class, 'idModulo');
+    }
 
-	public function pdf()
-	{
-		return $this->belongsTo(PDF::class, 'idPdf');
-	}
+    public function pdf()
+    {
+        return $this->belongsTo(PDF::class, 'idPdf');
+    }
 }

@@ -8,8 +8,7 @@ use Spatie\Permission\Models\Permission as SpatiePermission;
 
 class Permissions extends SpatiePermission
 {
+    use HasFactory;
     protected $fillable = ['name', 'guard_name'];
     public $guard_name = 'web';
-
-    use HasFactory;
 }

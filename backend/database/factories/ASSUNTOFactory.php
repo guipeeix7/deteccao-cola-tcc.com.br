@@ -26,11 +26,11 @@ final class ASSUNTOFactory extends Factory
     */
     public function definition()
     {
-        var_dump(\App\Models\ASSUNTO::factory()->create()->idAssunto  );
+        var_dump(\App\Models\ASSUNTO::factory()->create()->idAssunto);
 
         return [
             'nomeAssunto' => fake()->lexify('assunto-?????????????'),
-            'idAssuntoPai' => (\App\Models\ASSUNTO::inRandomOrder()->first() == NULL) ?
+            'idAssuntoPai' => (\App\Models\ASSUNTO::inRandomOrder()->first() == null) ?
                                \App\Models\ASSUNTO::factory()->create()->idAssunto :
                                \App\Models\ASSUNTO::inRandomOrder()->first()->idAssunto,
         ];

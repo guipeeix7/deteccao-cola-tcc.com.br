@@ -7,7 +7,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Qualificada
  *
@@ -20,26 +19,27 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  */
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Qualificada extends Model
 {
     use hasFactory;
 
-	protected $table = 'qualificada';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'qualificada';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idDisciplina' => 'int',
-		'idQuestao' => 'int'
-	];
+    protected $casts = [
+        'idDisciplina' => 'int',
+        'idQuestao' => 'int'
+    ];
 
-	public function disciplina()
-	{
-		return $this->belongsTo(DISCIPLINA::class, 'idDisciplina');
-	}
+    public function disciplina()
+    {
+        return $this->belongsTo(DISCIPLINA::class, 'idDisciplina');
+    }
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQuestao');
-	}
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQuestao');
+    }
 }

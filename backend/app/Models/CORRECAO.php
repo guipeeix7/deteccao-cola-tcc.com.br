@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+
 /**
  * Class CORRECAO
  *
@@ -32,29 +33,31 @@ use Illuminate\Support\Facades\DB;
 class CORRECAO extends Model
 {
     use HasFactory;
-	protected $table = 'CORRECAO';
-	protected $primaryKey = 'idCorrecao';
-	public $incrementing = true;
+    protected $table = 'CORRECAO';
+    protected $primaryKey = 'idCorrecao';
+    public $incrementing = true;
 
-	protected $casts = [
-		'idCorrecao' => 'int',
-		'idProfessor' => 'int',
-		'idUser' => 'int'
-	];
+    protected $casts = [
+        'idCorrecao' => 'int',
+        'idProfessor' => 'int',
+        'idUser' => 'int'
+    ];
 
-	protected $fillable = [
-		'textoCorrecao',
-		'idProfessor',
-		'idUser',
-		'correcaoSelecionada',
-	];
+    protected $fillable = [
+        'textoCorrecao',
+        'idProfessor',
+        'idUser',
+        'correcaoSelecionada',
+    ];
 
-    public static function collectCorrectionsByQuestionId(int $questionId){
+    public static function collectCorrectionsByQuestionId(int $questionId)
+    {
         // return DB::table('CORRECAO')
 
         // ->where()
     }
-    public static function checkIfExistsByQuestion(int $idQuestao){
+    public static function checkIfExistsByQuestion(int $idQuestao)
+    {
         return DB::table('CORRECAO')
         ->select(DB::raw('COUNT(explicada.idCorrecao) AS TOTAL'), 'CORRECAO.idCorrecao')
         ->leftJoin('explicada', 'CORRECAO.idCorrecao', 'explicada.idCorrecao')
@@ -64,10 +67,11 @@ class CORRECAO extends Model
         ->first();
     }
 
-    public static function selectCorrectionByQuestion($idQuestao, $idCorrecao){
+    public static function selectCorrectionByQuestion($idQuestao, $idCorrecao)
+    {
         $hasCorrect = self::checkIfExistsByQuestion($idQuestao);
 
-        if($hasCorrect?->idCorrecao == $idCorrecao){
+        if ($hasCorrect?->idCorrecao == $idCorrecao) {
 
             DB::table('CORRECAO')
             ->leftJoin('explicada', 'CORRECAO.idCorrecao', 'explicada.idCorrecao')
@@ -77,7 +81,7 @@ class CORRECAO extends Model
             return -2;
         }
 
-        if($hasCorrect?->TOTAL >= 1){
+        if ($hasCorrect?->TOTAL >= 1) {
             DB::table('CORRECAO')
             ->leftJoin('explicada', 'CORRECAO.idCorrecao', 'explicada.idCorrecao')
             ->where('idQuestao', '=', $idQuestao)
@@ -92,33 +96,34 @@ class CORRECAO extends Model
         return $correction;
     }
 
-	public function professor()
-	{
-		return $this->belongsTo(PROFESSOR::class, 'idProfessor')
-					->where('PROFESSOR.idProfessor', '=', 'CORRECAO.idProfessor')
-					->where('PROFESSOR.idUser', '=', 'CORRECAO.idUser');
-	}
+    public function professor()
+    {
+        return $this->belongsTo(PROFESSOR::class, 'idProfessor')
+                    ->where('PROFESSOR.idProfessor', '=', 'CORRECAO.idProfessor')
+                    ->where('PROFESSOR.idUser', '=', 'CORRECAO.idUser');
+    }
 
-	public function agrupa()
-	{
-		return $this->belongsToMany(PDF::class, 'agrupa', 'idCorrecao', 'idPdf');
-	}
+    public function agrupa()
+    {
+        return $this->belongsToMany(PDF::class, 'agrupa', 'idCorrecao', 'idPdf');
+    }
 
-	public function detalhadas()
-	{
-		return $this->hasMany(Detalhada::class, 'idCorrecao');
-	}
+    public function detalhadas()
+    {
+        return $this->hasMany(Detalhada::class, 'idCorrecao');
+    }
 
-	public function explicada()
-	{
-		return $this->hasMany(Explicada::class, 'idCorrecao');
-	}
+    public function explicada()
+    {
+        return $this->hasMany(Explicada::class, 'idCorrecao');
+    }
 
-	// public function incorporam()
-	// {
-	// 	return $this->hasMany(Incorpora::class, 'idCorrecao');
-	// }
-    public function incorpora(){
+    // public function incorporam()
+    // {
+    // 	return $this->hasMany(Incorpora::class, 'idCorrecao');
+    // }
+    public function incorpora()
+    {
         return $this->belongsToMany(VIDEO::class, 'incorpora', 'idCorrecao', 'idVideo');
     }
 }

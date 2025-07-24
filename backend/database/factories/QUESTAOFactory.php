@@ -32,8 +32,8 @@ final class QUESTAOFactory extends Factory
         return [
             'nomeQuestao' => fake()->text,
             'descricaoQuestao' => fake()->text,
-            'opcaoCorreta' => NULL,
-            'idBanca' => (  \App\Models\BANCA::inRandomOrder()->first()->idBanca == null) ?
+            'opcaoCorreta' => null,
+            'idBanca' => (\App\Models\BANCA::inRandomOrder()->first()->idBanca == null) ?
                             \App\Models\BANCA::factory()->create()->idBanca :
                             \App\Models\BANCA::inRandomOrder()->first()->idBanca,
         ];

@@ -24,19 +24,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FailedJob extends Model
 {
-	protected $table = 'failedjobs';
-	public $timestamps = false;
+    protected $table = 'failedjobs';
+    public $timestamps = false;
 
-	protected $casts = [
-		'failedat' => 'datetime'
-	];
+    protected $casts = [
+        'failedat' => 'datetime'
+    ];
 
-	protected $fillable = [
-		'uuid',
-		'connection',
-		'queue',
-		'payload',
-		'exception',
-		'failedat'
-	];
+    protected $fillable = [
+        'uuid',
+        'connection',
+        'queue',
+        'payload',
+        'exception',
+        'failedat'
+    ];
 }

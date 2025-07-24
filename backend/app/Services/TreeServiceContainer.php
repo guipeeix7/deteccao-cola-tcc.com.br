@@ -1,15 +1,16 @@
 <?php
+
 namespace App\Services;
 
-
-class TreeServiceContainer {
-
+class TreeServiceContainer
+{
     public function __construct()
     {
 
     }
 
-    static function buildTree(array $elements, $parentId = 0, $fatherReference = '', $childReference = '') {
+    public static function buildTree(array $elements, $parentId = 0, $fatherReference = '', $childReference = '')
+    {
         $branch = array();
         // var_dump($elements);
         foreach ($elements as $element) {

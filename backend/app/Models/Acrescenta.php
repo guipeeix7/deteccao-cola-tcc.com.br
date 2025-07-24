@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 /**
  * Class Acrescentum
  *
@@ -22,22 +23,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Acrescenta extends Model
 {
     use HasFactory;
-	protected $table = 'acrescenta';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'acrescenta';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idModulo' => 'int',
-		'idVideo' => 'int'
-	];
+    protected $casts = [
+        'idModulo' => 'int',
+        'idVideo' => 'int'
+    ];
 
-	public function modulo()
-	{
-		return $this->belongsTo(MODULO::class, 'idModulo');
-	}
+    public function modulo()
+    {
+        return $this->belongsTo(MODULO::class, 'idModulo');
+    }
 
-	public function video()
-	{
-		return $this->belongsTo(VIDEO::class, 'idVideo');
-	}
+    public function video()
+    {
+        return $this->belongsTo(VIDEO::class, 'idVideo');
+    }
 }

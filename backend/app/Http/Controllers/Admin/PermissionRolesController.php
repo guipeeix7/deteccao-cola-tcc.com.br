@@ -72,7 +72,8 @@ class PermissionRolesController extends Controller
         //
     }
 
-    public function syncPermissionsToRoles(Role $role, Storepermission_rolesRequest $request, $id){
+    public function syncPermissionsToRoles(Role $role, Storepermission_rolesRequest $request, $id)
+    {
         $validPermissions = $request->validated();
 
         $role = Role::findById($id);

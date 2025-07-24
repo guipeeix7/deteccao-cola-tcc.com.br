@@ -21,22 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Categoriza extends Model
 {
-	protected $table = 'categoriza';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'categoriza';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idAssunto' => 'int',
-		'idQuestao' => 'int'
-	];
+    protected $casts = [
+        'idAssunto' => 'int',
+        'idQuestao' => 'int'
+    ];
 
-	public function assunto()
-	{
-		return $this->belongsTo(ASSUNTO::class, 'idAssunto');
-	}
+    public function assunto()
+    {
+        return $this->belongsTo(ASSUNTO::class, 'idAssunto');
+    }
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQuestao');
-	}
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQuestao');
+    }
 }

@@ -21,17 +21,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ModelHasRole extends Model
 {
-	protected $table = 'modelhasroles';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'modelhasroles';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'roleid' => 'int',
-		'modelid' => 'int'
-	];
+    protected $casts = [
+        'roleid' => 'int',
+        'modelid' => 'int'
+    ];
 
-	public function role()
-	{
-		return $this->belongsTo(Role::class);
-	}
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

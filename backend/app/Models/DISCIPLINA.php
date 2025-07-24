@@ -24,25 +24,26 @@ class DISCIPLINA extends Model
 {
     use HasFactory;
 
-	protected $table = 'DISCIPLINA';
-	protected $primaryKey = 'idDisciplina';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'DISCIPLINA';
+    protected $primaryKey = 'idDisciplina';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idDisciplina' => 'int'
-	];
+    protected $casts = [
+        'idDisciplina' => 'int'
+    ];
 
-	protected $fillable = [
-		'nomeDisciplina'
-	];
+    protected $fillable = [
+        'nomeDisciplina'
+    ];
 
-	public function qualificada()
-	{
-		return $this->hasMany(Qualificada::class, 'idDisciplina');
-	}
+    public function qualificada()
+    {
+        return $this->hasMany(Qualificada::class, 'idDisciplina');
+    }
 
-    public static function withSimpleSearch($params, $searchable){
-        return self::where($searchable, 'LIKE' , "%".$params."%")->orderBy($searchable)->paginate(5);
+    public static function withSimpleSearch($params, $searchable)
+    {
+        return self::where($searchable, 'LIKE', "%".$params."%")->orderBy($searchable)->paginate(5);
     }
 }

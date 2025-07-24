@@ -21,27 +21,27 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Explicada extends Model
 {
-	protected $table = 'explicada';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'explicada';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idQUestao' => 'int',
-		'idCorrecao' => 'int'
-	];
-
-	protected $fillable = [
-		'idQUestao',
-		'idCorrecao'
+    protected $casts = [
+        'idQUestao' => 'int',
+        'idCorrecao' => 'int'
     ];
 
-	public function correcao()
-	{
-		return $this->belongsTo(CORRECAO::class, 'idCorrecao');
-	}
+    protected $fillable = [
+        'idQUestao',
+        'idCorrecao'
+    ];
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQUestao');
-	}
+    public function correcao()
+    {
+        return $this->belongsTo(CORRECAO::class, 'idCorrecao');
+    }
+
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQUestao');
+    }
 }

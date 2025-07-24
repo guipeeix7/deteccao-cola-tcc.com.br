@@ -33,7 +33,7 @@ final class CURSOFactory extends Factory
             'precoPromocao' => fake()->randomFloat(1, 10, 300),
             'siglaCurso' => fake()->lexify('curso-???'),
             'nomeCurso' => fake()->lexify('curso-????????????'),
-            'imagemCurso' => fake()->imageUrl(360,360, 'curso', true),
+            'imagemCurso' => fake()->imageUrl(360, 360, 'curso', true),
             'idConcurso' => (\App\Models\CONCURSO::inRandomOrder()->first()->idConcurso == null) ?
                              \App\Models\CONCURSO::factory()->create()->idConcurso :
                              \App\Models\CONCURSO::inRandomOrder()->first()->idConcurso

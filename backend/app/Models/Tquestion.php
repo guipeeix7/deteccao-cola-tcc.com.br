@@ -63,77 +63,77 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tquestion extends Model
 {
-	protected $table = 'tquestions';
-	protected $primaryKey = 'idQuestao';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'tquestions';
+    protected $primaryKey = 'idQuestao';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'numeroQuestaoAtual' => 'int',
-		'idQuestao' => 'int',
-		'concursoId' => 'int',
-		'numeroPosts' => 'int',
-		'possuiComentario' => 'int',
-		'idMateria' => 'int',
-		'possuiComentarioVideo' => 'int',
-		'crawlerId' => 'int',
-		'idAlternativaCorreta' => 'int'
-	];
+    protected $casts = [
+        'numeroQuestaoAtual' => 'int',
+        'idQuestao' => 'int',
+        'concursoId' => 'int',
+        'numeroPosts' => 'int',
+        'possuiComentario' => 'int',
+        'idMateria' => 'int',
+        'possuiComentarioVideo' => 'int',
+        'crawlerId' => 'int',
+        'idAlternativaCorreta' => 'int'
+    ];
 
-	protected $fillable = [
+    protected $fillable = [
         'idQuestao',
-		'numeroQuestaoAtual',
-		'concursoId',
-		'assinanteAvancado',
-		'nomeAssunto',
-		'orgaoNome',
-		'editalFicticio',
-		'numeroPosts',
-		'anulada',
-		'possuiComentario',
-		'urlConcurso',
-		'assuntoUrl',
-		'nomeMateria',
-		'orgaoOculto',
-		'orgaoUrl',
-		'caminhoLogotipoOrgao',
-		'gabaritoPreliminar',
-		'aceitouTermosForum',
-		'hash',
-		'desatualizadaComGabaritoPreliminar',
-		'enunciado',
-		'possuiResolucaoDaBanca',
-		'numeroConcursos',
-		'formatoQuestao',
-		'bancaUrl',
-		'possuiPostsNaoVistos',
-		'concursoAno',
-		'tipoQuestao',
-		'desatualizadaComGabaritoDefinivo',
-		'tempoTotalCronometroSegundos',
-		'status',
-		'cargoSigla',
-		'idMateria',
-		'dataAtual',
-		'materiaUrl',
-		'possuiComentarioVideo',
-		'bancaSigla',
-		'orgaoSigla',
-		'questaoOculta',
-		'concursoArea',
-		'crawlerId',
-		'comentario',
-		'idAlternativaCorreta',
-		'idQuestaoSistemaBase'
-	];
+        'numeroQuestaoAtual',
+        'concursoId',
+        'assinanteAvancado',
+        'nomeAssunto',
+        'orgaoNome',
+        'editalFicticio',
+        'numeroPosts',
+        'anulada',
+        'possuiComentario',
+        'urlConcurso',
+        'assuntoUrl',
+        'nomeMateria',
+        'orgaoOculto',
+        'orgaoUrl',
+        'caminhoLogotipoOrgao',
+        'gabaritoPreliminar',
+        'aceitouTermosForum',
+        'hash',
+        'desatualizadaComGabaritoPreliminar',
+        'enunciado',
+        'possuiResolucaoDaBanca',
+        'numeroConcursos',
+        'formatoQuestao',
+        'bancaUrl',
+        'possuiPostsNaoVistos',
+        'concursoAno',
+        'tipoQuestao',
+        'desatualizadaComGabaritoDefinivo',
+        'tempoTotalCronometroSegundos',
+        'status',
+        'cargoSigla',
+        'idMateria',
+        'dataAtual',
+        'materiaUrl',
+        'possuiComentarioVideo',
+        'bancaSigla',
+        'orgaoSigla',
+        'questaoOculta',
+        'concursoArea',
+        'crawlerId',
+        'comentario',
+        'idAlternativaCorreta',
+        'idQuestaoSistemaBase'
+    ];
 
-	public function crawler()
-	{
-		return $this->belongsTo(Crawler::class, 'crawlerId');
-	}
+    public function crawler()
+    {
+        return $this->belongsTo(Crawler::class, 'crawlerId');
+    }
 
-	public function alternativas()
-	{
-		return $this->hasMany(Alternativa::class, 'tQuestionId');
-	}
+    public function alternativas()
+    {
+        return $this->hasMany(Alternativa::class, 'tQuestionId');
+    }
 }

@@ -33,50 +33,50 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FATURACompra extends Model
 {
-	protected $table = 'fatura_compra';
-	protected $primaryKey = 'faturaId';
-	public $incrementing = true;
+    protected $table = 'fatura_compra';
+    protected $primaryKey = 'faturaId';
+    public $incrementing = true;
 
-	protected $casts = [
-		'faturaId' => 'int',
-		'statusPagamento' => 'int',
-		'desconto' => 'int',
-		'total' => 'float',
-		'totalPago' => 'float',
-		'idAluno' => 'int',
-		'idUser' => 'int',
-		'idCurso' => 'int'
-	];
+    protected $casts = [
+        'faturaId' => 'int',
+        'statusPagamento' => 'int',
+        'desconto' => 'int',
+        'total' => 'float',
+        'totalPago' => 'float',
+        'idAluno' => 'int',
+        'idUser' => 'int',
+        'idCurso' => 'int'
+    ];
 
-	protected $fillable = [
-		'referencia',
-		'statusPagamento',
-		'desconto',
-		'total',
-		'totalPago',
-		'idAluno',
-		'idUser',
-		'idCurso',
-		'paymentType',
-		'qr_code',
-		'qr_code_base64',
-		'ticket_url',
-	];
+    protected $fillable = [
+        'referencia',
+        'statusPagamento',
+        'desconto',
+        'total',
+        'totalPago',
+        'idAluno',
+        'idUser',
+        'idCurso',
+        'paymentType',
+        'qr_code',
+        'qr_code_base64',
+        'ticket_url',
+    ];
 
-	public function curso()
-	{
-		return $this->belongsTo(CURSO::class, 'idCurso');
-	}
+    public function curso()
+    {
+        return $this->belongsTo(CURSO::class, 'idCurso');
+    }
 
-	public function aluno()
-	{
-		return $this->belongsTo(ALUNO::class, 'idAluno')
-					->where('ALUNO.idAluno', '=', 'FATURAcompra.idAluno')
-					->where('ALUNO.idUser', '=', 'FATURAcompra.idUser');
-	}
+    public function aluno()
+    {
+        return $this->belongsTo(ALUNO::class, 'idAluno')
+                    ->where('ALUNO.idAluno', '=', 'FATURAcompra.idAluno')
+                    ->where('ALUNO.idUser', '=', 'FATURAcompra.idUser');
+    }
 
-	public function pedidoreembolsos()
-	{
-		return $this->hasMany(PEDIDOREEMBOLSO::class, 'faturaId');
-	}
+    public function pedidoreembolsos()
+    {
+        return $this->hasMany(PEDIDOREEMBOLSO::class, 'faturaId');
+    }
 }

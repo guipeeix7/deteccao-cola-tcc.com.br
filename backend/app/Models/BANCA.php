@@ -9,6 +9,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 /**
  * Class BANCA
  *
@@ -26,28 +27,28 @@ class BANCA extends Model
 {
     use HasFactory;
 
-	protected $table = 'BANCA';
-	protected $primaryKey = 'idBanca';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'BANCA';
+    protected $primaryKey = 'idBanca';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idBanca' => 'int'
-	];
+    protected $casts = [
+        'idBanca' => 'int'
+    ];
 
-	protected $fillable = [
-		'nomeBanca',
-		'siglaBanca',
-		'imagem'
-	];
+    protected $fillable = [
+        'nomeBanca',
+        'siglaBanca',
+        'imagem'
+    ];
 
-	public function concursos()
-	{
-		return $this->hasMany(CONCURSO::class, 'idBanca');
-	}
+    public function concursos()
+    {
+        return $this->hasMany(CONCURSO::class, 'idBanca');
+    }
 
-	public function questaos()
-	{
-		return $this->hasMany(QUESTAO::class, 'idBanca');
-	}
+    public function questaos()
+    {
+        return $this->hasMany(QUESTAO::class, 'idBanca');
+    }
 }

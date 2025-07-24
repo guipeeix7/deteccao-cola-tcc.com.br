@@ -25,27 +25,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class PDF extends Model
 {
     use HasFactory;
-	protected $table = 'PDF';
-	protected $primaryKey = 'idPdf';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'PDF';
+    protected $primaryKey = 'idPdf';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idPdf' => 'int'
-	];
+    protected $casts = [
+        'idPdf' => 'int'
+    ];
 
-	protected $fillable = [
-		'nomePdf',
-		'caminho'
-	];
+    protected $fillable = [
+        'nomePdf',
+        'caminho'
+    ];
 
-	public function agrupas()
-	{
-		return $this->hasMany(Agrupa::class, 'idPdf');
-	}
+    public function agrupas()
+    {
+        return $this->hasMany(Agrupa::class, 'idPdf');
+    }
 
-	public function integras()
-	{
-		return $this->hasMany(Integra::class, 'idPdf');
-	}
+    public function integras()
+    {
+        return $this->hasMany(Integra::class, 'idPdf');
+    }
 }

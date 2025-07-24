@@ -21,23 +21,23 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Alternative extends Model
 {
-	protected $table = 'alternatives';
-	protected $primaryKey = 'idAlternativa';
-	public $incrementing = true;
-	public $timestamps = false;
+    protected $table = 'alternatives';
+    protected $primaryKey = 'idAlternativa';
+    public $incrementing = true;
+    public $timestamps = false;
 
-	protected $casts = [
-		'tQuestionId' => 'int',
-		'idAlternativa' => 'int'
-	];
+    protected $casts = [
+        'tQuestionId' => 'int',
+        'idAlternativa' => 'int'
+    ];
 
-	protected $fillable = [
-		'tQuestionId',
-		'alternativa'
-	];
+    protected $fillable = [
+        'tQuestionId',
+        'alternativa'
+    ];
 
-	public function tquestion()
-	{
-		return $this->belongsTo(Tquestion::class, 'tQuestionId');
-	}
+    public function tquestion()
+    {
+        return $this->belongsTo(Tquestion::class, 'tQuestionId');
+    }
 }

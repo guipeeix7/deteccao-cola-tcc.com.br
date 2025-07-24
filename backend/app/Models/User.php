@@ -12,7 +12,10 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -65,24 +68,27 @@ class User extends Authenticatable implements MustVerifyEmail
     // {
     //     return $this->hasOne(Professor::class);
     // }
-    public static function schoolUser($user){
+    public static function schoolUser($user)
+    {
         $query = DB::table('users')
         ->select('schoolSufix')
-        ->where('schoolSufix', 'IS NOT', NULL);
-        if($user && $user->hasRole('client')){
-            $query->where("schoolSufix" , "=", $user->schoolSufix);
+        ->where('schoolSufix', 'IS NOT', null);
+        if ($user && $user->hasRole('client')) {
+            $query->where("schoolSufix", "=", $user->schoolSufix);
         }
         $data = $query->get()
         ->pluck('schoolSufix');
-        return $data; 
+        return $data;
     }
-    
-    public function professor(){
+
+    public function professor()
+    {
         return $this->hasOne(PROFESSOR::class, 'idUser');
     }
 
-    public function aluno(){
-        return $this->hasOne(ALUNO::class,'idUser');
+    public function aluno()
+    {
+        return $this->hasOne(ALUNO::class, 'idUser');
     }
 
     public function address()

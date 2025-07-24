@@ -18,4 +18,4 @@ class WcOrderShippingStatus extends Model
         'shipping_status',
         'wc_order_shipping_statuscol'
     ];
-}?>
+}

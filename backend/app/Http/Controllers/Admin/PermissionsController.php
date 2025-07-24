@@ -23,14 +23,15 @@ class PermissionsController extends Controller
     {
         // $all_permissions_in_database = Permission::all();
         $name = $request->input('name');
-        $all_permissions_in_database = UtilQueries::withSimpleSearchByClass(Permission::class,$name, 'name');
+        $all_permissions_in_database = UtilQueries::withSimpleSearchByClass(Permission::class, $name, 'name');
         // $all_roles_in_database = UtilQueries::withSimpleSearch(Role::class, $name, 'name');
 
         return PermissionResource::collection($all_permissions_in_database);
 
         // return $all_permissions_in_database->toJson(JSON_PRETTY_PRINT);
     }
-    public function verifyUnique(Request $request){
+    public function verifyUnique(Request $request)
+    {
         $name = $request->input('name');
         $permission = Permission::where('name', $name)->get();
         return PermissionResource::collection($permission);
@@ -65,7 +66,7 @@ class PermissionsController extends Controller
     public function show(Permission $permissions, $id)
     {
 
-        $permission =  new StorePermissionsRequest;
+        $permission =  new StorePermissionsRequest();
         $rules = $permission->rules();
         $dataTypes = StorePermissionsRequest::dataTypes();
 
@@ -113,7 +114,8 @@ class PermissionsController extends Controller
 
 
 
-    public function getCurrentUserPermissions(Request $request){
+    public function getCurrentUserPermissions(Request $request)
+    {
         $user = auth()->user();
 
         $permissions = $user->getAllPermissions();

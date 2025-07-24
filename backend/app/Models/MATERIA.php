@@ -28,25 +28,26 @@ class MATERIA extends Model
 {
     use HasFactory;
 
-	protected $table = 'MATERIA';
-	protected $primaryKey = 'idMateria';
-	public $timestamps = false;
+    protected $table = 'MATERIA';
+    protected $primaryKey = 'idMateria';
+    public $timestamps = false;
 
-	protected $casts = [
-		'idMateria' => 'int'
-	];
+    protected $casts = [
+        'idMateria' => 'int'
+    ];
 
-	protected $fillable = [
-		'nomeMateria',
-		'siglaMateria'
-	];
+    protected $fillable = [
+        'nomeMateria',
+        'siglaMateria'
+    ];
 
-	public function rotuladas()
-	{
-		return $this->hasMany(Vinculada::class, 'idMateria');
-	}
+    public function rotuladas()
+    {
+        return $this->hasMany(Vinculada::class, 'idMateria');
+    }
 
-    public static function withSimpleSearch($params, $searchable){
-        return self::where($searchable, 'LIKE' , "%".$params."%")->orderBy($searchable)->paginate(5);
+    public static function withSimpleSearch($params, $searchable)
+    {
+        return self::where($searchable, 'LIKE', "%".$params."%")->orderBy($searchable)->paginate(5);
     }
 }

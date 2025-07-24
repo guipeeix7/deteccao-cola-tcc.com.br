@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 /**
  * Class Agrega
  *
@@ -22,22 +23,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Agrega extends Model
 {
     use HasFactory;
-	protected $table = 'agrega';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'agrega';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idProva' => 'int',
-		'idModulo' => 'int'
-	];
+    protected $casts = [
+        'idProva' => 'int',
+        'idModulo' => 'int'
+    ];
 
-	public function modulo()
-	{
-		return $this->belongsTo(MODULO::class, 'idModulo');
-	}
+    public function modulo()
+    {
+        return $this->belongsTo(MODULO::class, 'idModulo');
+    }
 
-	public function prova()
-	{
-		return $this->belongsTo(PROVA::class, 'idProva');
-	}
+    public function prova()
+    {
+        return $this->belongsTo(PROVA::class, 'idProva');
+    }
 }

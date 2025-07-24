@@ -17,7 +17,6 @@ use App\Models\FATURACompra;
 
 class AdministradorController extends UserController
 {
-
     public function __construct()
     {
 
@@ -25,23 +24,24 @@ class AdministradorController extends UserController
     /**
      * Display a listing of the resource.
      */
-    private function getSalesStatistics(){
+    private function getSalesStatistics()
+    {
 
     }
 
-    public function deleteUserAccountUnderDemand($userId){
+    public function deleteUserAccountUnderDemand($userId)
+    {
         $errorMessage = '';
         $user = DB::table('users')
         ->where('id', '=', $userId)
-        ->where('status' , '=', -1)
+        ->where('status', '=', -1)
         ->first();
-        if($user){
-            PEDIDOREEMBOLSO::where('idUser', '=' ,$userId)->delete();
-            FATURACompra::where('idUser', '=' ,$userId)->delete();
-            CONTABANCARIA::where('idUser', '=' ,$userId)->delete();
+        if ($user) {
+            PEDIDOREEMBOLSO::where('idUser', '=', $userId)->delete();
+            FATURACompra::where('idUser', '=', $userId)->delete();
+            CONTABANCARIA::where('idUser', '=', $userId)->delete();
             User::where('id', '=', $userId)->delete();
-        }
-        else{
+        } else {
             $errorMessage = 'O usuário especificado não solicitou a deleção de conta.';
         }
         return ['data' => $userId, 'error' => $errorMessage];

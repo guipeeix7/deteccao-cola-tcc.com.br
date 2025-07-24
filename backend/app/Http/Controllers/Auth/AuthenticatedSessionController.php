@@ -21,11 +21,12 @@ class AuthenticatedSessionController extends Controller
 
         return response()->noContent();
     }
-    
-    public function isLogged(){
+
+    public function isLogged()
+    {
         $status = auth('sanctum')->check() ? "auth" : "guest";
         $email = '';
-        if($status == "auth"){
+        if ($status == "auth") {
             $email = auth('sanctum')->user()->email;
         }
         return json_encode([ 'status' =>  $status , 'email' => $email ]);

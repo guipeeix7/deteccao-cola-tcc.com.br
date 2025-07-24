@@ -1,12 +1,16 @@
 <?php
+
 namespace App\Http\Controllers\Shared;
 
-class TimeHelper{
-    public function __construct(){
+class TimeHelper
+{
+    public function __construct()
+    {
         date_default_timezone_set('America/Sao_Paulo');
     }
 
-    public static function convertIntervals($range){
+    public static function convertIntervals($range)
+    {
         // $range = $request->input('rangeDate');
 
         $dateBegin = new \stdClass();
@@ -23,17 +27,16 @@ class TimeHelper{
         } else {
             $rangeStrinExploded = explode("to", $range);
             $beginRange = $rangeStrinExploded[0];
-            if(isset($rangeStrinExploded[1])){
+            if (isset($rangeStrinExploded[1])) {
                 $endRange = $rangeStrinExploded[1];
                 $dateEnd = new \DateTime(date($endRange));
-            }
-            else{
+            } else {
                 $dateEnd = new \DateTime(date('Y-m-01', strtotime(date($range).' +1 day')));
             }
             $dateBegin = new \DateTime(date($beginRange));
         }
 
-        return ['begin' => $dateBegin, 'end'=> $dateEnd];
+        return ['begin' => $dateBegin, 'end' => $dateEnd];
 
     }
 
@@ -42,7 +45,8 @@ class TimeHelper{
      * @param $startDate The initial date
      * @param $endDate The end date
      */
-    public static function getDatesInBetween($startDate, $endDate) {
+    public static function getDatesInBetween($startDate, $endDate)
+    {
         $start = new \DateTime($startDate);
         $end = new \DateTime($endDate);
 
@@ -56,12 +60,14 @@ class TimeHelper{
         return $dates;
     }
 
-    public static function getCurrentDate(){
+    public static function getCurrentDate()
+    {
         return date('Y-m-d', time());
     }
 
 
-    public static function getCurrentTime(){
+    public static function getCurrentTime()
+    {
         return date('h:i:s', time());
     }
 }

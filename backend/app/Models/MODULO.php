@@ -9,6 +9,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 /**
  * Class MODULO
  *
@@ -27,41 +28,41 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MODULO extends Model
 {
     use HasFactory;
-	protected $table = 'MODULO';
-	protected $primaryKey = 'idModulo';
-	public $incrementing = true;
-	public $timestamps = false;
+    protected $table = 'MODULO';
+    protected $primaryKey = 'idModulo';
+    public $incrementing = true;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idModulo' => 'int',
-		'posicaoModulo' => 'int',
-		'idCurso' => 'int'
-	];
+    protected $casts = [
+        'idModulo' => 'int',
+        'posicaoModulo' => 'int',
+        'idCurso' => 'int'
+    ];
 
-	protected $fillable = [
-		'posicaoModulo',
-		'nomeModulo',
-		'idCurso',
+    protected $fillable = [
+        'posicaoModulo',
+        'nomeModulo',
+        'idCurso',
         'moduloAberto'
-	];
+    ];
 
-	public function curso()
-	{
-		return $this->belongsTo(CURSO::class, 'idCurso');
-	}
+    public function curso()
+    {
+        return $this->belongsTo(CURSO::class, 'idCurso');
+    }
 
-	public function acrescenta()
-	{
-		return $this->belongsToMany(VIDEO::class, 'acrescenta', 'idModulo', 'idVideo');
-	}
+    public function acrescenta()
+    {
+        return $this->belongsToMany(VIDEO::class, 'acrescenta', 'idModulo', 'idVideo');
+    }
 
-	public function agrega()
-	{
-		return $this->belongsToMany(PROVA::class, 'agrega', 'idModulo' ,'idProva');
-	}
+    public function agrega()
+    {
+        return $this->belongsToMany(PROVA::class, 'agrega', 'idModulo', 'idProva');
+    }
 
-	public function integra()
-	{
-		return $this->belongsToMany(PDF::class, 'integra', 'idModulo', 'idPdf');
-	}
+    public function integra()
+    {
+        return $this->belongsToMany(PDF::class, 'integra', 'idModulo', 'idPdf');
+    }
 }

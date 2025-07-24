@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 // use App\Models\roles;
@@ -36,7 +37,7 @@ class RolesController extends Controller
     public function create()
     {
         // $role = new Role;
-        $role =  new StoreRolesRequest;
+        $role =  new StoreRolesRequest();
 
         $rules = $role->rules();
         $dataTypes = $role->dataTypes();
@@ -67,7 +68,8 @@ class RolesController extends Controller
     }
 
 
-    public function verifyUnique(Request $request){
+    public function verifyUnique(Request $request)
+    {
         $name = $request->input('name');
         $role = Role::where('name', $name)->get();
         return RoleResource::collection($role);
@@ -79,7 +81,7 @@ class RolesController extends Controller
     public function show(Role $roles, $id)
     {
 
-        $role =  new StoreRolesRequest;
+        $role =  new StoreRolesRequest();
         $rules = $role->rules();
         $dataTypes = $role->dataTypes();
 
@@ -110,16 +112,16 @@ class RolesController extends Controller
         //
         $validated = $request->validated();
 
-        Role::findById( $id)
+        Role::findById($id)
         ->update(['name' => $validated['name']]);
 
         // $permissions = [];
         // foreach($request->get('permissions') as $permission ){
-            //     $permssionValue = Permissions::where('id' , '=', $permission)->first();
-            //     array_push($permissions, $permssionValue->name);
-            // }
+        //     $permssionValue = Permissions::where('id' , '=', $permission)->first();
+        //     array_push($permissions, $permssionValue->name);
+        // }
 
-        $role = Role::findById( $id);
+        $role = Role::findById($id);
         $role->syncPermissions([$request->get('permissions')]);
 
         app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
@@ -140,13 +142,15 @@ class RolesController extends Controller
         return $deleted;
     }
 
-    public function addPermissionsToRole(Request $request){
-        $validated = $request->validate([
+    public function addPermissionsToRole(Request $request)
+    {
+        $validated = $request->validate(
+            [
             'roleId' => 'required|integer',
             'permissionNames' => 'required|array',
             "permissionNames.*"  => "distinct",
         ],
-        [
+            [
             'roleId.integer' => 'O parâmetro da role deve ser passado como inteiro',
             'permissionNames.string*' => 'O nome das roles devem estar em formato de texto',
         ]
@@ -159,10 +163,12 @@ class RolesController extends Controller
         // return $role;
     }
 
-    public function assingUserSingleToRole(Request $request){
+    public function assingUserSingleToRole(Request $request)
+    {
         $user = User::where('id', '=', $request->userId)->first();
 
-        $validated = $request->validate([
+        $validated = $request->validate(
+            [
                 'roleId' => 'required|integer',
                 'userId' => 'required|integer'
             ],
@@ -181,8 +187,10 @@ class RolesController extends Controller
         return [$role, $user];
     }
 
-    public function assingUserToRoles(Request $request){
-        $validated = $request->validate([
+    public function assingUserToRoles(Request $request)
+    {
+        $validated = $request->validate(
+            [
                 'userId' => 'required|integer',
                 'roleNames' => 'required|array',
                 "roleNames.*"  => "required|string|distinct"
@@ -198,11 +206,12 @@ class RolesController extends Controller
     }
 
 
-    public function assignSuperAdmin(){
+    public function assignSuperAdmin()
+    {
 
 
         $admin = User::where('email', '=', 'admin@admin.com');
-        if(!$admin->exists()){
+        if (!$admin->exists()) {
             $admin = User::create([
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
@@ -211,7 +220,7 @@ class RolesController extends Controller
         }
 
         $supRole = Role::where('nam e', '=', 'admin');
-        if(!$supRole->exists()){
+        if (!$supRole->exists()) {
             $supRole = Role::create(['name' => 'admin']);
         }
         $admin->first()->assignRole($supRole->first());
@@ -219,7 +228,8 @@ class RolesController extends Controller
         return;
     }
 
-    public function getCurrentUserRoles(){
+    public function getCurrentUserRoles()
+    {
         $user = auth()->user();
         $permissions = $user->getAllPermissions();
 
@@ -227,7 +237,8 @@ class RolesController extends Controller
         // return User::with('roles')->where('id', '=', $user->id)->first()['roles']->toJson(JSON_PRETTY_PRINT);
     }
 
-    public function getAllFromLoginAttempt(){
+    public function getAllFromLoginAttempt()
+    {
         // $role_permissions = Role::with('permissions')->get();
         $role_permissions = DB::table('role_has_permissions')
         ->select('permissions.name AS pName', 'roles.name AS rName  ')

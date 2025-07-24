@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 /**
  * Class Abrange
  *
@@ -22,22 +23,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Abrange extends Model
 {
     use HasFactory;
-	protected $table = 'abrange';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'abrange';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idProva' => 'int',
-		'idQuestao' => 'int'
-	];
+    protected $casts = [
+        'idProva' => 'int',
+        'idQuestao' => 'int'
+    ];
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQuestao');
-	}
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQuestao');
+    }
 
-	public function prova()
-	{
-		return $this->belongsTo(PROVA::class, 'idProva');
-	}
+    public function prova()
+    {
+        return $this->belongsTo(PROVA::class, 'idProva');
+    }
 }

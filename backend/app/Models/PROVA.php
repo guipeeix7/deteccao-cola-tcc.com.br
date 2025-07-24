@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+
 /**
  * Class PROVA
  *
@@ -32,31 +33,33 @@ use Illuminate\Support\Facades\DB;
 class PROVA extends Model
 {
     use HasFactory;
-	protected $table = 'PROVA';
-	protected $primaryKey = 'idProva';
-	public $incrementing = true;
+    protected $table = 'PROVA';
+    protected $primaryKey = 'idProva';
+    public $incrementing = true;
 
-	protected $casts = [
-		'idProva' => 'int',
-		'dataAplicacao' => 'datetime'
-	];
+    protected $casts = [
+        'idProva' => 'int',
+        'dataAplicacao' => 'datetime'
+    ];
 
-	protected $fillable = [
-		'nomeProva',
-		'descricaoProva',
-		'dataAplicacao',
+    protected $fillable = [
+        'nomeProva',
+        'descricaoProva',
+        'dataAplicacao',
         'tempoMaximoProva'
     ];
 
-    static function contestEnded($idProva, $uid){
+    public static function contestEnded($idProva, $uid)
+    {
         $dateHour = DB::table('realiza')->select('fimData', 'fimHora')->where('idUser', '=', $uid)->where('idProva', '=', $idProva)->first();
-        if($dateHour->fimData != NULL && $dateHour->fimHora != NULL){
+        if ($dateHour->fimData != null && $dateHour->fimHora != null) {
             return 1;
         }
         return 0;
     }
 
-    public static function getStatsFromExam($idModulo, $idUser){
+    public static function getStatsFromExam($idModulo, $idUser)
+    {
         return DB::select("
             select * FROM (
             SELECT COUNT(QUESTAO.idQuestao) AS TotalQuestions from agrega
@@ -109,30 +112,30 @@ class PROVA extends Model
         ", [$idModulo, $idModulo, $idUser, $idUser, $idModulo]);
     }
 
-	public function abrange()
-	{
-		return $this->belongsToMany(QUESTAO::class, 'abrange', 'idProva' ,'idQuestao');
+    public function abrange()
+    {
+        return $this->belongsToMany(QUESTAO::class, 'abrange', 'idProva', 'idQuestao');
         // return $this->belongsToMany(AREA::class,'especificada','idQuestao','idArea');
 
-	}
+    }
 
-	public function agregas()
-	{
-		return $this->hasMany(Agrega::class, 'idProva');
-	}
+    public function agregas()
+    {
+        return $this->hasMany(Agrega::class, 'idProva');
+    }
 
-	public function detalhadas()
-	{
-		return $this->hasMany(Detalhada::class, 'idProva');
-	}
+    public function detalhadas()
+    {
+        return $this->hasMany(Detalhada::class, 'idProva');
+    }
 
-	public function realizas()
-	{
-		return $this->hasMany(Realiza::class, 'idProva');
-	}
+    public function realizas()
+    {
+        return $this->hasMany(Realiza::class, 'idProva');
+    }
 
-	public function utilizas()
-	{
-		return $this->hasMany(Utiliza::class, 'idProva');
-	}
+    public function utilizas()
+    {
+        return $this->hasMany(Utiliza::class, 'idProva');
+    }
 }

@@ -27,32 +27,32 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Crawler extends Model
 {
-	protected $table = 'crawler';
-	protected $primaryKey = 'crawlerId';
-	public $incrementing = true;
-	public $timestamps = false;
+    protected $table = 'crawler';
+    protected $primaryKey = 'crawlerId';
+    public $incrementing = true;
+    public $timestamps = false;
 
-	protected $casts = [
-		'filterId' => 'int',
-		'lastUpdateAt' => 'datetime',
-		'crawlerId' => 'int',
-		'lastQuestionId' => 'int',
-		'page' => 'int',
-		'status' => 'int'
-	];
+    protected $casts = [
+        'filterId' => 'int',
+        'lastUpdateAt' => 'datetime',
+        'crawlerId' => 'int',
+        'lastQuestionId' => 'int',
+        'page' => 'int',
+        'status' => 'int'
+    ];
 
-	protected $fillable = [
-		'filterId',
-		'lastUpdateAt',
-		'page',
-		'lastQuestionId',
+    protected $fillable = [
+        'filterId',
+        'lastUpdateAt',
+        'page',
+        'lastQuestionId',
         'siteUrl',
-		'siteName',
-		'status'
-	];
+        'siteName',
+        'status'
+    ];
 
-	public function tquestions()
-	{
-		return $this->hasMany(Tquestion::class, 'crawlerId');
-	}
+    public function tquestions()
+    {
+        return $this->hasMany(Tquestion::class, 'crawlerId');
+    }
 }

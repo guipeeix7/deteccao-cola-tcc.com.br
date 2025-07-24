@@ -8,9 +8,9 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdaterolesRequest extends FormRequest
 {
- /**
-     * Determine if the user is authorized to make this request.
-     */
+    /**
+        * Determine if the user is authorized to make this request.
+        */
     public function authorize(): bool
     {
         return true;
@@ -37,7 +37,8 @@ class UpdaterolesRequest extends FormRequest
         ];
     }
 
-    public function failedValidation(Validator $validator){
+    public function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response()->json([
             'success'   => false,
             'message'   => 'Validation errors',

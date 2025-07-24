@@ -9,6 +9,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 /**
  * Class ASSUNTO
  *
@@ -27,39 +28,39 @@ class ASSUNTO extends Model
 {
     use HasFactory;
     protected $table = 'ASSUNTO';
-	protected $primaryKey = 'idAssunto';
-	public $incrementing = true;
-	public $timestamps = false;
+    protected $primaryKey = 'idAssunto';
+    public $incrementing = true;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idAssunto' => 'int',
-		'idAssuntoPai' => 'int'
-	];
+    protected $casts = [
+        'idAssunto' => 'int',
+        'idAssuntoPai' => 'int'
+    ];
 
-	protected $fillable = [
+    protected $fillable = [
         'idAssunto',
-		'nomeAssunto',
-		'ativo',
-		'idAssuntoPai'
-	];
+        'nomeAssunto',
+        'ativo',
+        'idAssuntoPai'
+    ];
 
-	public function assunto()
-	{
-		return $this->belongsTo(ASSUNTO::class, 'idAssuntoPai');
-	}
+    public function assunto()
+    {
+        return $this->belongsTo(ASSUNTO::class, 'idAssuntoPai');
+    }
 
-	public function assuntos()
-	{
-		return $this->hasMany(ASSUNTO::class, 'idAssuntoPai');
-	}
+    public function assuntos()
+    {
+        return $this->hasMany(ASSUNTO::class, 'idAssuntoPai');
+    }
 
-	public function categoriza()
-	{
-		return $this->hasMany(Categoriza::class, 'idAssunto');
-	}
+    public function categoriza()
+    {
+        return $this->hasMany(Categoriza::class, 'idAssunto');
+    }
 
-	public function engloba()
-	{
-		return $this->hasMany(Engloba::class, 'idAssunto');
-	}
+    public function engloba()
+    {
+        return $this->hasMany(Engloba::class, 'idAssunto');
+    }
 }

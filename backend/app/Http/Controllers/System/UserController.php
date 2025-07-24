@@ -19,7 +19,9 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function __construct(private UserServiceContainer $userServiceContainer) {}
+    public function __construct(private UserServiceContainer $userServiceContainer)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,12 +40,12 @@ class UserController extends Controller
         $userStatus = $request->input('status');
 
         // $name, $userType, $email
-        $builder = USER::where('name', 'LIKE',  "%" . $name . "%")
+        $builder = USER::where('name', 'LIKE', "%" . $name . "%")
             ->where('email', 'LIKE', "%" . $email . "%");
         if ($userType != "") {
             if ($userType == "aluno") {
                 $builder->has('aluno');
-            } else if ($userType == "professor") {
+            } elseif ($userType == "professor") {
                 $builder->has('professor');
             }
         }
@@ -98,8 +100,8 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateusersRequest $request, User $user)
-    {   
-        
+    {
+
         // Get validated data from the request
         $validated = $request->validated();
 
@@ -120,7 +122,7 @@ class UserController extends Controller
         if ($request->hasFile('fotoPerfil') && $request->file('fotoPerfil')->isValid()) {
             $path = Storage::putFile('users', $request->file('fotoPerfil'));
             $validated['fotoPerfil'] = $path;
-        } else if ($user->fotoPerfil != null ) {
+        } elseif ($user->fotoPerfil != null) {
             // Keep existing image if no new one uploaded
             $validated['fotoPerfil'] = $user->fotoPerfil;
         }

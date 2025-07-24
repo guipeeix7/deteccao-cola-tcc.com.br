@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Resources;
-use App\Http\Resources\ProfessorResource;
 
+use App\Http\Resources\ProfessorResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;

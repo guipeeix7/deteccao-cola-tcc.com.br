@@ -22,25 +22,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Escreve extends Model
 {
-	protected $table = 'escreve';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'escreve';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idResumo' => 'int',
-		'idAluno' => 'int',
-		'idUser' => 'int'
-	];
+    protected $casts = [
+        'idResumo' => 'int',
+        'idAluno' => 'int',
+        'idUser' => 'int'
+    ];
 
-	public function aluno()
-	{
-		return $this->belongsTo(ALUNO::class, 'idAluno')
-					->where('ALUNO.idAluno', '=', 'escreve.idAluno')
-					->where('ALUNO.idUser', '=', 'escreve.idUser');
-	}
+    public function aluno()
+    {
+        return $this->belongsTo(ALUNO::class, 'idAluno')
+                    ->where('ALUNO.idAluno', '=', 'escreve.idAluno')
+                    ->where('ALUNO.idUser', '=', 'escreve.idUser');
+    }
 
-	public function resumo()
-	{
-		return $this->belongsTo(RESUMO::class, 'idResumo');
-	}
+    public function resumo()
+    {
+        return $this->belongsTo(RESUMO::class, 'idResumo');
+    }
 }

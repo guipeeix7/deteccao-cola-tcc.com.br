@@ -20,16 +20,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PasswordResetToken extends Model
 {
-	protected $table = 'passwordresettokens';
-	protected $primaryKey = 'email';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'passwordresettokens';
+    protected $primaryKey = 'email';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $hidden = [
-		'token'
-	];
+    protected $hidden = [
+        'token'
+    ];
 
-	protected $fillable = [
-		'token'
-	];
+    protected $fillable = [
+        'token'
+    ];
 }

@@ -29,46 +29,47 @@ use Illuminate\Support\Facades\DB;
  */
 class PEDIDOREEMBOLSO extends Model
 {
-	protected $table = 'PEDIDOREEMBOLSO';
-	protected $primaryKey = 'reembolsoId';
-	public $incrementing = true;
-	public $timestamps = false;
+    protected $table = 'PEDIDOREEMBOLSO';
+    protected $primaryKey = 'reembolsoId';
+    public $incrementing = true;
+    public $timestamps = false;
 
-	protected $casts = [
-		'reembolsoId' => 'int',
-		'idAluno' => 'int',
-		'idUser' => 'int',
-		'faturaId' => 'int',
-	];
+    protected $casts = [
+        'reembolsoId' => 'int',
+        'idAluno' => 'int',
+        'idUser' => 'int',
+        'faturaId' => 'int',
+    ];
 
-	protected $fillable = [
-		'statusReembolso',
-		'textoExplicativo',
-		'imagemComprovante',
-		'idAluno',
-		'idUser',
-		'faturaId',
-		'createdAtDate',
-		'createdAtTime',
-		'updatedAtDate',
-		'updatedAtTime',
-	];
+    protected $fillable = [
+        'statusReembolso',
+        'textoExplicativo',
+        'imagemComprovante',
+        'idAluno',
+        'idUser',
+        'faturaId',
+        'createdAtDate',
+        'createdAtTime',
+        'updatedAtDate',
+        'updatedAtTime',
+    ];
 
-	public function aluno()
-	{
-		return $this->belongsTo(ALUNO::class, 'idAluno')
-					->where('ALUNO.idAluno', '=', 'PEDIDOREEMBOLSO.idAluno')
-					->where('ALUNO.idUser', '=', 'PEDIDOREEMBOLSO.idUser');
-	}
+    public function aluno()
+    {
+        return $this->belongsTo(ALUNO::class, 'idAluno')
+                    ->where('ALUNO.idAluno', '=', 'PEDIDOREEMBOLSO.idAluno')
+                    ->where('ALUNO.idUser', '=', 'PEDIDOREEMBOLSO.idUser');
+    }
 
-	public function faturacompra()
-	{
-		return $this->belongsTo(FATURACompra::class, 'faturaId');
-	}
+    public function faturacompra()
+    {
+        return $this->belongsTo(FATURACompra::class, 'faturaId');
+    }
 
-    public static function courseRefounded($courseId, $userId){
+    public static function courseRefounded($courseId, $userId)
+    {
         return DB::table('FATURA_compra AS Fc')
-        ->leftJoin('PEDIDOREEMBOLSO AS PR', 'Fc.faturaId','=', 'PR.faturaID')
+        ->leftJoin('PEDIDOREEMBOLSO AS PR', 'Fc.faturaId', '=', 'PR.faturaID')
         ->where('PR.idUser', '=', $userId)
         ->where('Fc.idCurso', '=', $courseId)
         ->where('PR.statusReembolso', '=', 'accepted')

@@ -27,7 +27,7 @@ final class CONCURSOFactory extends Factory
     public function definition(): array
     {
         return [
-            'idBanca' => \App\Models\CONCURSO::orderBy('idBanca','desc')->first()->idBanca+1,
+            'idBanca' => \App\Models\CONCURSO::orderBy('idBanca', 'desc')->first()->idBanca + 1,
             'notaMinima' => fake()->randomNumber(),
             'editalUrl' => fake()->url,
             'realizacaoEm' => fake()->dateTime(),
@@ -35,7 +35,7 @@ final class CONCURSOFactory extends Factory
             'siglaConcurso' => fake()->lexify('concurso-???'),
             'nomeConcurso' => fake()->lexify('concurso-????????????'),
             'escolaridade' => fake()->randomElement(['medio', 'superior']),
-            'imagemConcurso' => fake()->imageUrl(360,360, 'contest', true),
+            'imagemConcurso' => fake()->imageUrl(360, 360, 'contest', true),
             'numeroVagas' => fake()->randomNumber(),
             'possuiTesteAptidaoFisica' => fake()->boolean,
             'idBanca' => (\App\Models\BANCA::inRandomOrder()->first()->idBanca == null) ?

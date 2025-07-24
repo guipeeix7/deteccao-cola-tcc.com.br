@@ -1,26 +1,28 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\ALUNO;
 use App\Models\PROFESSOR;
 use App\Models\User;
 
-class UserServiceContainer {
+class UserServiceContainer
+{
     public function linkNewEmptyAluno(int $userId = 0)
     {
         $data = [];
         $user = User::find($userId);
         $aluno = ALUNO::where('idUser', '=', $user->id)->first();
-        if($aluno){
+        if ($aluno) {
             $this->destroyAluno($aluno);
             return print(json_encode(["message" => "aluno destroyed"]));
-        }else{
+        } else {
             $data = Aluno::create(
                 [
                     'metasEObjetivos' => '',
                     'idUser' => $user->id
                     ]
-                );
+            );
             return print(json_encode($data));
         }
     }
@@ -37,17 +39,17 @@ class UserServiceContainer {
         $data = [];
         $user = User::find($userId);
         $professor = PROFESSOR::where('idUser', '=', $user->id)->first();
-        if($professor){
+        if ($professor) {
             $this->destroyProfessor($professor);
             return print(json_encode(["message" => "professor destroyed"]));
-        }else{
+        } else {
             $data = PROFESSOR::create(
                 [
                     'linkedin' => '',
                     'lattes' => '',
                     'idUser' => $user->id
                     ]
-                );
+            );
             return print(json_encode($data));
         }
     }
@@ -58,5 +60,3 @@ class UserServiceContainer {
         return $deleted;
     }
 }
-
-?>

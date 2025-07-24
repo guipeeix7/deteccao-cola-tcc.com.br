@@ -32,7 +32,7 @@ class UpdateusersRequest extends FormRequest
             'email' => 'required|string|email|max:255',
             'password' => 'nullable|string|min:8',
             'apelido' => 'nullable|string|max:60',
-            'cpf' => ['nullable|numeric|digits:11', new FormatoCpf, new Cpf],
+            'cpf' => ['nullable|numeric|digits:11', new FormatoCpf(), new Cpf()],
             // 'dataNascimento' => 'nullable|date',
             'status' => 'nullable|boolean',
             'schoolSufix' => 'nullable|string',

@@ -25,28 +25,28 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Endereco extends Model
 {
-	protected $table = 'endereco';
-	protected $primaryKey = 'enderecoId';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'endereco';
+    protected $primaryKey = 'enderecoId';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'enderecoId' => 'int',
-		'numero' => 'int',
-		'idUser' => 'int'
-	];
+    protected $casts = [
+        'enderecoId' => 'int',
+        'numero' => 'int',
+        'idUser' => 'int'
+    ];
 
-	protected $fillable = [
-		'cidade',
-		'estado',
-		'vizinhanca',
-		'complemento',
-		'numero',
-		'idUser'
-	];
+    protected $fillable = [
+        'cidade',
+        'estado',
+        'vizinhanca',
+        'complemento',
+        'numero',
+        'idUser'
+    ];
 
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'idUser');
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser');
+    }
 }

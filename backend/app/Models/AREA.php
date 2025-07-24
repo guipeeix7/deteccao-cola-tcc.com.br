@@ -26,27 +26,28 @@ class AREA extends Model
     use HasFactory;
     protected $hidden = ['pivot'];
 
-	protected $table = 'AREA';
-	protected $primaryKey = 'idArea';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'AREA';
+    protected $primaryKey = 'idArea';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idArea' => 'int'
-	];
+    protected $casts = [
+        'idArea' => 'int'
+    ];
 
-	protected $fillable = [
-		'nomeArea',
-		'siglaArea'
-	];
+    protected $fillable = [
+        'nomeArea',
+        'siglaArea'
+    ];
 
-	public function especificadas()
-	{
-		return $this->hasMany(Especificada::class, 'idArea');
-	}
+    public function especificadas()
+    {
+        return $this->hasMany(Especificada::class, 'idArea');
+    }
 
 
-    public static function withSimpleSearch($params, $searchable){
-        return self::where($searchable, 'LIKE' , "%".$params."%")->orderBy($searchable)->paginate(5);
+    public static function withSimpleSearch($params, $searchable)
+    {
+        return self::where($searchable, 'LIKE', "%".$params."%")->orderBy($searchable)->paginate(5);
     }
 }

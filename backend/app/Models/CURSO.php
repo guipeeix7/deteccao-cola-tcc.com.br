@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+
 /**
  * Class CURSO
  *
@@ -33,33 +34,35 @@ use Illuminate\Support\Facades\DB;
 class CURSO extends Model
 {
     use HasFactory;
-	protected $table = 'CURSO';
-	protected $primaryKey = 'idCurso';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'CURSO';
+    protected $primaryKey = 'idCurso';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'precoAtual' => 'float',
-		'precoPromocao' => 'float',
-		'idCurso' => 'int',
-		'idConcurso' => 'int'
-	];
+    protected $casts = [
+        'precoAtual' => 'float',
+        'precoPromocao' => 'float',
+        'idCurso' => 'int',
+        'idConcurso' => 'int'
+    ];
 
-	protected $fillable = [
-		'resumo',
-		'descricaoCompleta',
-		'precoAtual',
-		'precoPromocao',
-		'siglaCurso',
-		'nomeCurso',
-		'imagemCurso',
-		'idConcurso'
-	];
+    protected $fillable = [
+        'resumo',
+        'descricaoCompleta',
+        'precoAtual',
+        'precoPromocao',
+        'siglaCurso',
+        'nomeCurso',
+        'imagemCurso',
+        'idConcurso'
+    ];
 
 
 
-    public static function getStatusFromCourse($idCurso, $idUser){
-        return DB::select("
+    public static function getStatusFromCourse($idCurso, $idUser)
+    {
+        return DB::select(
+            "
             SELECT * FROM(
                 SELECT COUNT(QUESTAO.idQuestao) AS TotalQuestions FROM CURSO
                 LEFT JOIN MODULO  ON MODULO.idCurso = ?
@@ -83,7 +86,8 @@ class CURSO extends Model
             ",
             [
                 $idCurso, $idCurso, $idUser
-            ]);
+            ]
+        );
     }
 
     /**
@@ -91,32 +95,33 @@ class CURSO extends Model
      * @param $courseId id of desired course
      * @param $userId authenticated user id
      */
-    public static function isPaidCourse(int $courseId, int $userId):int{
+    public static function isPaidCourse(int $courseId, int $userId): int
+    {
         return (DB::table('fatura_compra')
         ->where('idUser', '=', $userId)
-        ->where('statusPagamento','=' ,'approved')
+        ->where('statusPagamento', '=', 'approved')
         ->where('idCurso', '=', $courseId)
         // ->where('total','=','totalPago')
         ->exists() == true) ? 1 : 0;
     }
 
-	public function concurso()
-	{
-		return $this->belongsTo(CONCURSO::class, 'idConcurso');
-	}
+    public function concurso()
+    {
+        return $this->belongsTo(CONCURSO::class, 'idConcurso');
+    }
 
-	public function faturacompras()
-	{
-		return $this->hasMany(FATURACompra::class, 'idCurso');
-	}
+    public function faturacompras()
+    {
+        return $this->hasMany(FATURACompra::class, 'idCurso');
+    }
 
-	public function modulos()
-	{
-		return $this->hasMany(MODULO::class, 'idCurso');
-	}
+    public function modulos()
+    {
+        return $this->hasMany(MODULO::class, 'idCurso');
+    }
 
-	public function foca()
-	{
-		return $this->hasMany(Foca::class, 'idCurso');
-	}
+    public function foca()
+    {
+        return $this->hasMany(Foca::class, 'idCurso');
+    }
 }

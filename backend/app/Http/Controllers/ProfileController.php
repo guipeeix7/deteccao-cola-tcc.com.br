@@ -13,13 +13,12 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Address;
 
-
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request, )
+    public function edit(Request $request)
     {
         $profileInfo = User::all();
         // $userInfo = User::find($request->user()->id);
@@ -29,7 +28,8 @@ class ProfileController extends Controller
         ->where('id', '=', $request->user()->id)
         ->first();
 
-        return response()->json(['data'=>[
+        return response()->json(
+            ['data' => [
                 'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
                 'status' => session('status'),
                 'profile' => $request->user()->name,

@@ -36,13 +36,15 @@ class StorePermissionsRequest extends FormRequest
         ];
     }
 
-    public static function dataTypes(){
+    public static function dataTypes()
+    {
         return [
             'name' => 'text',
         ];
     }
 
-    public function failedValidation(Validator $validator){
+    public function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response()->json([
             'success'   => false,
             'message'   => 'Validation errors',

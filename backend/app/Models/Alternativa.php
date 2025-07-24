@@ -24,23 +24,23 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 class Alternativa extends Model
 {
     use HasFactory;
-	protected $table = 'alternativa';
-	protected $primaryKey = 'alternativaId';
-	public $incrementing = true;
-	public $timestamps = false;
+    protected $table = 'alternativa';
+    protected $primaryKey = 'alternativaId';
+    public $incrementing = true;
+    public $timestamps = false;
 
-	protected $casts = [
-		'alternativaId' => 'int',
-		'idQuestao' => 'int'
-	];
+    protected $casts = [
+        'alternativaId' => 'int',
+        'idQuestao' => 'int'
+    ];
 
-	protected $fillable = [
-		'alternativa',
-		'idQuestao'
-	];
+    protected $fillable = [
+        'alternativa',
+        'idQuestao'
+    ];
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQuestao');
-	}
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQuestao');
+    }
 }

@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers\Shared;
 
-class Helper{
-    public static function convertStringToArrayNumber($string = ""){
+class Helper
+{
+    public static function convertStringToArrayNumber($string = "")
+    {
         $arr = explode(",", $string);
 
         $filtered = [];
-        foreach($arr as $item)
-            if(is_numeric($item))
+        foreach ($arr as $item) {
+            if (is_numeric($item)) {
                 $filtered[] = (int)$item;
+            }
+        }
         return $filtered;
     }
 
-    public static function validaCPF($cpf) {
+    public static function validaCPF($cpf)
+    {
 
         // Extrai somente os números
-        $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
+        $cpf = preg_replace('/[^0-9]/is', '', $cpf);
         // Verifica se foi informado todos os digitos corretamente
         if (strlen($cpf) != 11) {
             return false;
@@ -41,7 +46,8 @@ class Helper{
 
     }
 
-    public static function convertQueryBuilderPaginationToEloquent($data){
+    public static function convertQueryBuilderPaginationToEloquent($data)
+    {
         $converted_data = [];
         var_dump($converted_data, $data);
         // $converted_data['data'] = $data;

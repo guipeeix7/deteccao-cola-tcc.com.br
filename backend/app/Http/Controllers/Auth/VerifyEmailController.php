@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 // use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -10,7 +12,6 @@ use App\Models\User;
 
 class VerifyEmailController extends Controller
 {
-
     public function __invoke(EmailVerificationRequest $request)
     {
         $user = User::find(request()->route('id'));

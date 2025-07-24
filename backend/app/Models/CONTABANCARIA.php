@@ -23,27 +23,27 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CONTABANCARIA extends Model
 {
-	protected $table = 'CONTABANCARIA';
-	protected $primaryKey = 'idContaBancaria';
-	public $incrementing = true;
-	public $timestamps = false;
+    protected $table = 'CONTABANCARIA';
+    protected $primaryKey = 'idContaBancaria';
+    public $incrementing = true;
+    public $timestamps = false;
 
-        protected $casts = [
-            'idContaBancaria' => 'int',
-            'agencia' => 'int',
-            'numeroConta' => 'int',
-            'idUser' => 'int'
-	];
+    protected $casts = [
+        'idContaBancaria' => 'int',
+        'agencia' => 'int',
+        'numeroConta' => 'int',
+        'idUser' => 'int'
+    ];
 
-	protected $fillable = [
-		'agencia',
-		'numeroConta',
-		'pix',
-		'idUser'
-	];
+    protected $fillable = [
+        'agencia',
+        'numeroConta',
+        'pix',
+        'idUser'
+    ];
 
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'idUser');
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser');
+    }
 }

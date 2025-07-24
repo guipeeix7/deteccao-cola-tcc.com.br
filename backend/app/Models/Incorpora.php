@@ -21,22 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Incorpora extends Model
 {
-	protected $table = 'incorpora';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'incorpora';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idVideo' => 'int',
-		'idCorrecao' => 'int'
-	];
+    protected $casts = [
+        'idVideo' => 'int',
+        'idCorrecao' => 'int'
+    ];
 
-	public function correcao()
-	{
-		return $this->belongsTo(CORRECAO::class, 'idCorrecao');
-	}
+    public function correcao()
+    {
+        return $this->belongsTo(CORRECAO::class, 'idCorrecao');
+    }
 
-	public function video()
-	{
-		return $this->belongsTo(VIDEO::class, 'idVideo');
-	}
+    public function video()
+    {
+        return $this->belongsTo(VIDEO::class, 'idVideo');
+    }
 }

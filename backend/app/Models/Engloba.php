@@ -21,22 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Engloba extends Model
 {
-	protected $table = 'engloba';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'engloba';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idResumo' => 'int',
-		'idAssunto' => 'int'
-	];
+    protected $casts = [
+        'idResumo' => 'int',
+        'idAssunto' => 'int'
+    ];
 
-	public function assunto()
-	{
-		return $this->belongsTo(ASSUNTO::class, 'idAssunto');
-	}
+    public function assunto()
+    {
+        return $this->belongsTo(ASSUNTO::class, 'idAssunto');
+    }
 
-	public function resumo()
-	{
-		return $this->belongsTo(RESUMO::class, 'idResumo');
-	}
+    public function resumo()
+    {
+        return $this->belongsTo(RESUMO::class, 'idResumo');
+    }
 }

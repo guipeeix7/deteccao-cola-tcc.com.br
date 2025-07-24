@@ -21,22 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Focada extends Model
 {
-	protected $table = 'focada';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'focada';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'idQuestao' => 'int',
-		'idConcurso' => 'int'
-	];
+    protected $casts = [
+        'idQuestao' => 'int',
+        'idConcurso' => 'int'
+    ];
 
-	public function concurso()
-	{
-		return $this->belongsTo(CONCURSO::class, 'idConcurso');
-	}
+    public function concurso()
+    {
+        return $this->belongsTo(CONCURSO::class, 'idConcurso');
+    }
 
-	public function questao()
-	{
-		return $this->belongsTo(QUESTAO::class, 'idQuestao');
-	}
+    public function questao()
+    {
+        return $this->belongsTo(QUESTAO::class, 'idQuestao');
+    }
 }
