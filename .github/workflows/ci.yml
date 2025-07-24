@@ -60,7 +60,7 @@ jobs:
         run: cd backend && composer install --prefer-dist --no-progress
         
       - name: Run PHPStan analysis
-        run: backend/vendor/bin/phpstan analyse app --level=5
+        run: backend/vendor/bin/phpstan analyse ./app --level=5
 
   test:
     runs-on: ubuntu-latest
