@@ -37,7 +37,7 @@ ng s --configuration=development
 
 
 Obs: Lembre o .env do backend deve estar apontando tambem para o banco de dados correto. 
-## ⚙️ Banco de dado
+## ⚙️ Banco de dados
 Rode direto
 ```bash
 cd <pasta do projeto>/backups
