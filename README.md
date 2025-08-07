@@ -1,5 +1,17 @@
 Bem-vindo(a) ao repositório do **deteccao-cola-tcc**! Este projeto foi iniciado com [Laravel](https://laravel.com), um framework PHP elegante e poderoso para construção de aplicações web modernas.
 
+
+# Rodar pelo docker 
+```bash
+  docker-compose up --build
+```
+após a rodagem entre na pasta do frontend e rode:
+
+```bash
+  ng s --configuration=development
+```
+
+# Rodar manualmente
 Antes de começar, certifique-se de que você tem os seguintes pré-requisitos instalados:
 
 - PHP >= 8.1
