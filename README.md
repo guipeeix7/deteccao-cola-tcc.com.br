@@ -8,6 +8,7 @@ Bem-vindo(a) ao repositório do **deteccao-cola-tcc**! Este projeto foi iniciado
 após a rodagem entre na pasta do frontend e rode:
 
 ```bash
+  npm install --legacy-peer-deps
   ng s --configuration=development
 ```
 
