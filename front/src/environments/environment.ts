@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
 
-  // API_URL: 'https://api.devzone-br.space/'
-  API_URL: 'http://localhost:8000/'
+  API_URL: 'http://localhost:8080/'
 };
 
 /*
