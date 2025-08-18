@@ -67,6 +67,14 @@ services:
     depends_on:
       - db-tcc-cola
 
+  api:
+    container_name: detection-api
+    build:
+     context: ./detection-service
+     target: builder
+    ports: 
+      - '8000:8000'
+
 networks:
   tcc-cola-network:
     driver: bridge
