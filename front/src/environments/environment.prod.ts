@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://api.prod-zone.com.br/'
+  API_URL: 'https://api.deteccao-cola-tcc.com.br/'
 };
